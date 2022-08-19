@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "InaiReactNativeSampleIntegration.app"
-               BlueprintName = "InaiReactNativeSampleIntegration"
-               ReferencedContainer = "container:InaiReactNativeSampleIntegration.xcodeproj">
+               BuildableName = "inai_react_native_sample_integration.app"
+               BlueprintName = "inai_react_native_sample_integration"
+               ReferencedContainer = "container:inai_react_native_sample_integration.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "InaiReactNativeSampleIntegrationTests.xctest"
-               BlueprintName = "InaiReactNativeSampleIntegrationTests"
-               ReferencedContainer = "container:InaiReactNativeSampleIntegration.xcodeproj">
+               BuildableName = "inai_react_native_sample_integrationTests.xctest"
+               BlueprintName = "inai_react_native_sample_integrationTests"
+               ReferencedContainer = "container:inai_react_native_sample_integration.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "InaiReactNativeSampleIntegration.app"
-            BlueprintName = "InaiReactNativeSampleIntegration"
-            ReferencedContainer = "container:InaiReactNativeSampleIntegration.xcodeproj">
+            BuildableName = "inai_react_native_sample_integration.app"
+            BlueprintName = "inai_react_native_sample_integration"
+            ReferencedContainer = "container:inai_react_native_sample_integration.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "InaiReactNativeSampleIntegration.app"
-            BlueprintName = "InaiReactNativeSampleIntegration"
-            ReferencedContainer = "container:InaiReactNativeSampleIntegration.xcodeproj">
+            BuildableName = "inai_react_native_sample_integration.app"
+            BlueprintName = "inai_react_native_sample_integration"
+            ReferencedContainer = "container:inai_react_native_sample_integration.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

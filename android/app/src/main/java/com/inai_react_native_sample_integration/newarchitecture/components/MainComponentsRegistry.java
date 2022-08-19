@@ -1,4 +1,4 @@
-package com.inaireactnativesampleintegration.newarchitecture.components;
+package com.inai_react_native_sample_integration.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

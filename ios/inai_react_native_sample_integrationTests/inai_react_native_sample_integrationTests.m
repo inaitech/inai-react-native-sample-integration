@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface InaiReactNativeSampleIntegrationTests : XCTestCase
+@interface inai_react_native_sample_integrationTests : XCTestCase
 
 @end
 
-@implementation InaiReactNativeSampleIntegrationTests
+@implementation inai_react_native_sample_integrationTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

@@ -1,4 +1,4 @@
-package com.inaireactnativesampleintegration;
+package com.inai_react_native_sample_integration;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "InaiReactNativeSampleIntegration";
+    return "inai_react_native_sample_integration";
   }
 
   /**

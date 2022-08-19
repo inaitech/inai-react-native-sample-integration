@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.inaireactnativesampleintegration">
+  package="com.inai_react_native_sample_integration">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

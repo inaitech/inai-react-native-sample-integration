@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-InaiReactNativeSampleIntegration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-InaiReactNativeSampleIntegration.a */; };
+		00E356F31AD99517003FC87E /* inai_react_native_sample_integrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* inai_react_native_sample_integrationTests.m */; };
+		0C80B921A6F3F58F76C31292 /* libPods-inai_react_native_sample_integration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-inai_react_native_sample_integration.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.a */; };
+		7699B88040F8A987B510C191 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -22,27 +22,27 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = InaiReactNativeSampleIntegration;
+			remoteInfo = inai_react_native_sample_integration;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InaiReactNativeSampleIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* inai_react_native_sample_integrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = inai_react_native_sample_integrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InaiReactNativeSampleIntegrationTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* InaiReactNativeSampleIntegration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InaiReactNativeSampleIntegration.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = InaiReactNativeSampleIntegration/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = InaiReactNativeSampleIntegration/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = InaiReactNativeSampleIntegration/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = InaiReactNativeSampleIntegration/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = InaiReactNativeSampleIntegration/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-InaiReactNativeSampleIntegration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InaiReactNativeSampleIntegration.debug.xcconfig"; path = "Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-InaiReactNativeSampleIntegration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InaiReactNativeSampleIntegration.release.xcconfig"; path = "Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-InaiReactNativeSampleIntegration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InaiReactNativeSampleIntegration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = InaiReactNativeSampleIntegration/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.release.xcconfig"; path = "Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* inai_react_native_sample_integrationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = inai_react_native_sample_integrationTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* inai_react_native_sample_integration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inai_react_native_sample_integration.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = inai_react_native_sample_integration/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = inai_react_native_sample_integration/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = inai_react_native_sample_integration/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = inai_react_native_sample_integration/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inai_react_native_sample_integration/main.m; sourceTree = "<group>"; };
+		19F6CBCC0A4E27FBF8BF4A61 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4392A12AC88292D35C810B /* Pods-inai_react_native_sample_integration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration.debug.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-inai_react_native_sample_integration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration.release.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-inai_react_native_sample_integration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-inai_react_native_sample_integration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = inai_react_native_sample_integration/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.release.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.a in Frameworks */,
+				7699B88040F8A987B510C191 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,20 +59,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-InaiReactNativeSampleIntegration.a in Frameworks */,
+				0C80B921A6F3F58F76C31292 /* libPods-inai_react_native_sample_integration.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests */ = {
+		00E356EF1AD99517003FC87E /* inai_react_native_sample_integrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.m */,
+				00E356F21AD99517003FC87E /* inai_react_native_sample_integrationTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = InaiReactNativeSampleIntegrationTests;
+			path = inai_react_native_sample_integrationTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -83,7 +83,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* InaiReactNativeSampleIntegration */ = {
+		13B07FAE1A68108700A75B9A /* inai_react_native_sample_integration */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -93,15 +93,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = InaiReactNativeSampleIntegration;
+			name = inai_react_native_sample_integration;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-InaiReactNativeSampleIntegration.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.a */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-inai_react_native_sample_integration.a */,
+				19F6CBCC0A4E27FBF8BF4A61 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,9 +116,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* InaiReactNativeSampleIntegration */,
+				13B07FAE1A68108700A75B9A /* inai_react_native_sample_integration */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests */,
+				00E356EF1AD99517003FC87E /* inai_react_native_sample_integrationTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -131,8 +131,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* InaiReactNativeSampleIntegration.app */,
-				00E356EE1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.xctest */,
+				13B07F961A680F5B00A75B9A /* inai_react_native_sample_integration.app */,
+				00E356EE1AD99517003FC87E /* inai_react_native_sample_integrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-InaiReactNativeSampleIntegration.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-InaiReactNativeSampleIntegration.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-inai_react_native_sample_integration.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-inai_react_native_sample_integration.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -151,9 +151,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests */ = {
+		00E356ED1AD99517003FC87E /* inai_react_native_sample_integrationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "InaiReactNativeSampleIntegrationTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "inai_react_native_sample_integrationTests" */;
 			buildPhases = (
 				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -167,14 +167,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = InaiReactNativeSampleIntegrationTests;
-			productName = InaiReactNativeSampleIntegrationTests;
-			productReference = 00E356EE1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.xctest */;
+			name = inai_react_native_sample_integrationTests;
+			productName = inai_react_native_sample_integrationTests;
+			productReference = 00E356EE1AD99517003FC87E /* inai_react_native_sample_integrationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* InaiReactNativeSampleIntegration */ = {
+		13B07F861A680F5B00A75B9A /* inai_react_native_sample_integration */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "InaiReactNativeSampleIntegration" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inai_react_native_sample_integration" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -189,9 +189,9 @@
 			);
 			dependencies = (
 			);
-			name = InaiReactNativeSampleIntegration;
-			productName = InaiReactNativeSampleIntegration;
-			productReference = 13B07F961A680F5B00A75B9A /* InaiReactNativeSampleIntegration.app */;
+			name = inai_react_native_sample_integration;
+			productName = inai_react_native_sample_integration;
+			productReference = 13B07F961A680F5B00A75B9A /* inai_react_native_sample_integration.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -211,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "InaiReactNativeSampleIntegration" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "inai_react_native_sample_integration" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,8 +224,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* InaiReactNativeSampleIntegration */,
-				00E356ED1AD99517003FC87E /* InaiReactNativeSampleIntegrationTests */,
+				13B07F861A680F5B00A75B9A /* inai_react_native_sample_integration */,
+				00E356ED1AD99517003FC87E /* inai_react_native_sample_integrationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -272,15 +272,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
@@ -298,7 +298,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -320,7 +320,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-InaiReactNativeSampleIntegration-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-inai_react_native_sample_integration-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -333,15 +333,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
@@ -350,15 +350,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration/Pods-InaiReactNativeSampleIntegration-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
@@ -367,15 +367,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests/Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -404,7 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* InaiReactNativeSampleIntegrationTests.m in Sources */,
+				00E356F31AD99517003FC87E /* inai_react_native_sample_integrationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +422,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* InaiReactNativeSampleIntegration */;
+			target = 13B07F861A680F5B00A75B9A /* inai_react_native_sample_integration */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,14 +430,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.debug.xcconfig */;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = InaiReactNativeSampleIntegrationTests/Info.plist;
+				INFOPLIST_FILE = inai_react_native_sample_integrationTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,17 +451,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InaiReactNativeSampleIntegration.app/InaiReactNativeSampleIntegration";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inai_react_native_sample_integration.app/inai_react_native_sample_integration";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-InaiReactNativeSampleIntegration-InaiReactNativeSampleIntegrationTests.release.xcconfig */;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = InaiReactNativeSampleIntegrationTests/Info.plist;
+				INFOPLIST_FILE = inai_react_native_sample_integrationTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -475,19 +475,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InaiReactNativeSampleIntegration.app/InaiReactNativeSampleIntegration";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inai_react_native_sample_integration.app/inai_react_native_sample_integration";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-InaiReactNativeSampleIntegration.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-inai_react_native_sample_integration.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = InaiReactNativeSampleIntegration/Info.plist;
+				INFOPLIST_FILE = inai_react_native_sample_integration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -498,7 +498,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = InaiReactNativeSampleIntegration;
+				PRODUCT_NAME = inai_react_native_sample_integration;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -507,12 +507,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-InaiReactNativeSampleIntegration.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-inai_react_native_sample_integration.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = InaiReactNativeSampleIntegration/Info.plist;
+				INFOPLIST_FILE = inai_react_native_sample_integration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -523,7 +523,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = InaiReactNativeSampleIntegration;
+				PRODUCT_NAME = inai_react_native_sample_integration;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -669,7 +669,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "InaiReactNativeSampleIntegrationTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "inai_react_native_sample_integrationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -678,7 +678,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "InaiReactNativeSampleIntegration" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "inai_react_native_sample_integration" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -687,7 +687,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "InaiReactNativeSampleIntegration" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "inai_react_native_sample_integration" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

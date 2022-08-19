@@ -1,4 +1,4 @@
-package com.inaireactnativesampleintegration.newarchitecture;
+package com.inai_react_native_sample_integration.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.inaireactnativesampleintegration.BuildConfig;
-import com.inaireactnativesampleintegration.newarchitecture.components.MainComponentsRegistry;
-import com.inaireactnativesampleintegration.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.inai_react_native_sample_integration.BuildConfig;
+import com.inai_react_native_sample_integration.newarchitecture.components.MainComponentsRegistry;
+import com.inai_react_native_sample_integration.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
