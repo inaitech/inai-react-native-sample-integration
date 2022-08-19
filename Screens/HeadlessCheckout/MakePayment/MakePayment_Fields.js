@@ -47,7 +47,7 @@
               JSON.stringify(response),
               [
                 {text: 'OK', onPress: () => { 
-                  //  navigation.navigate("Home");
+                  navigation.navigate("Home");
                 }},
               ]
             );
@@ -57,7 +57,7 @@
           JSON.stringify(err),
           [
             {text: 'OK', onPress: () => { 
-              //  navigation.navigate("Home");
+              navigation.navigate("Home");
             }},
           ]
         );
