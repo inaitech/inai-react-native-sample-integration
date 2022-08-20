@@ -121,7 +121,7 @@ const fieldChanged = (formField, val) => {
                  }
                }
                color="white"
-               title= "Checkout"
+               title= "Pay with Saved Payment Method"
              />
            </View>
        </SafeAreaView>
