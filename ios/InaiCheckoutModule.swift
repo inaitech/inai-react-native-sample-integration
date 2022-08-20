@@ -55,6 +55,39 @@ class InaiCheckoutModule: NSObject {
             }
         }
     }
+
+    @objc(validateFields:orderId:countryCode:paymentMethodOption:paymentDetails:withResolver:withRejecter:)
+    func validateFields(token: String, orderId: String, countryCode: String,
+                        paymentMethodOption: String, paymentDetails: [String : Any],
+                        resolve:@escaping RCTPromiseResolveBlock,
+                        reject:@escaping RCTPromiseRejectBlock) -> Void {
+        self.resolver = resolve;
+        let styles = InaiConfig_Styles(
+            container: InaiConfig_Styles_Container(backgroundColor: "#fff"),
+            cta: InaiConfig_Styles_Cta(backgroundColor: "#123456"),
+            errorText: InaiConfig_Styles_ErrorText(color: "#000000")
+        )
+
+        let config = InaiConfig(token: token,
+                                orderId : orderId,
+                                styles: styles,
+                                countryCode: countryCode
+        )
+
+        DispatchQueue.main.async {
+            if let inaiCheckout = InaiCheckout(config: config),
+                let viewController = RCTPresentedViewController()  {
+                self.vc = viewController
+                inaiCheckout.validateFields(paymentMethodOption: paymentMethodOption,
+                                         paymentDetails: paymentDetails,
+                                         viewController: viewController,
+                                         delegate: self)
+            } else {
+                let error = NSError(domain: "error", code: 0, userInfo: ["message": "Invalid Config"])
+                reject("error", "Invalid Config", error);
+            }
+        }
+    }
 }
 
 extension InaiCheckoutModule: InaiCheckoutDelegate {
@@ -67,6 +100,23 @@ extension InaiCheckoutModule: InaiCheckoutDelegate {
                 status = "success"
               } else if (result.status == Inai_PaymentStatus.failed) {
                 status = "failed"
+              }
+              
+              let resultDict: [String: Any] = ["status": status, "data": result.data]
+              //  pass the data back to the react native resolver
+              self.resolver(resultDict)
+            }
+        }
+    }
+}
+
+extension InaiCheckoutModule: InaiValidateFieldsDelegate {
+    func fieldsValidationFinished(with result: Inai_ValidateFieldsResult) {
+        if let vc = self.vc {
+            vc.dismiss(animated: true) {
+              var status = "failed"
+              if( result.status == Inai_ValidateFieldsStatus.success) {
+                status = "success"
               }
               
               let resultDict: [String: Any] = ["status": status, "data": result.data]

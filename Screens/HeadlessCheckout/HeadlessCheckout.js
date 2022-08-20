@@ -15,7 +15,8 @@
  const Flows = {
    "MakePayment": "Make Payment",
    "SavePaymentMethod": "Save A Payment Method",
-   "MakePaymentWithSavedMethod": "Pay With saved Payment Method"
+   "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
+   "ValidateFields": "Validate Fields"
  };
 
  const Colors = {
