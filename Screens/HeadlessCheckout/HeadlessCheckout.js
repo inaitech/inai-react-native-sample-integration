@@ -14,7 +14,8 @@
  
  const Flows = {
    "MakePayment": "Make Payment",
-   "SavePaymentMethod": "Save Payment Method"
+   "SavePaymentMethod": "Save A Payment Method",
+   "MakePaymentWithSavedMethod": "Pay With saved Payment Method"
  };
 
  const Colors = {
@@ -27,10 +28,14 @@
     let navKey = flowKey;
 
     if (flowKey == "MakePayment") {
+      //  Load product view with normal
       navKey = "Product";
       options = {mode: "normal"};
-    }
-
+    } else if (flowKey == "MakePaymentWithSavedMethod") {
+      //  Load product view with pay with saved method mode
+      navKey = "Product";
+      options = {mode: "payWithSavedMethod"};
+    } 
     navigation.navigate(navKey, options); 
   };
 

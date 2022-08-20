@@ -21,6 +21,10 @@
  import SavePaymentMethod from "./Screens/HeadlessCheckout/SavePaymentMethod/SavePaymentMethod";
  import SavePaymentMethod_Fields from "./Screens/HeadlessCheckout/SavePaymentMethod/SavePaymentMethod_Fields";
 
+ // Make Payment With Saved Method
+ import MakePaymentWithSavedMethod from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod";
+ import MakePaymentWithSavedMethod_Fields from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod_Fields";
+ 
  const Stack = createNativeStackNavigator();
 
  const App = () => {
@@ -37,6 +41,9 @@
 
             <Stack.Screen name="SavePaymentMethod" component={SavePaymentMethod} options={{ title: "Payment Options" }} />
             <Stack.Screen name="SavePaymentMethod_Fields" component={SavePaymentMethod_Fields} options={{ title: "Save Payment Method" }} />
+
+            <Stack.Screen name="MakePaymentWithSavedMethod" component={MakePaymentWithSavedMethod} options={{ title: "Saved Payment Methods" }} />
+            <Stack.Screen name="MakePaymentWithSavedMethod_Fields" component={MakePaymentWithSavedMethod_Fields} options={{ title: "Payment" }} />
 
         </Stack.Navigator>
      </NavigationContainer>
