@@ -1,13 +1,15 @@
 import android.util.Log
 import com.facebook.react.bridge.*
 import io.inai.android_sdk.*
+import org.json.JSONObject
 
-class InaiHeadlessModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), InaiCheckoutDelegate {
+class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext),
+    InaiCheckoutDelegate {
 
     var paymentCallback: Callback? = null
 
     override fun getName(): String {
-        return "InaiHeadlessModule"
+        return "InaiCheckoutModule"
     }
 
     @ReactMethod
@@ -15,11 +17,13 @@ class InaiHeadlessModule(reactContext: ReactApplicationContext) : ReactContextBa
         inaiToken: String,
         orderId: String,
         countryCode: String,
+        paymentMethodOption: String,
+        paymentDetailsObject: JSONObject,
         callback: Callback
     ) {
         this.paymentCallback = callback
         val styles = InaiConfigStyles(
-            container = InaiConfigStylesContainer(backgroundColor= "#efefef"),
+            container = InaiConfigStylesContainer(backgroundColor = "#efefef"),
             cta = InaiConfigStylesCta(backgroundColor = "#53509a"),
             errorText = InaiConfigStylesErrorText(color = "#000000")
         )
@@ -34,7 +38,7 @@ class InaiHeadlessModule(reactContext: ReactApplicationContext) : ReactContextBa
             val checkout = InaiCheckout(config)
             currentActivity.let {
                 if (it != null) {
-                    checkout.presentCheckout(it, this)
+                    checkout.makePayment(paymentMethodOption, paymentDetailsObject, it, this)
                 }
             }
         } catch (e: Exception) {
