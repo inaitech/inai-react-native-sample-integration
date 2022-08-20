@@ -21,13 +21,9 @@
   const {mode} = route.params;
 
   const showPaymentOptions = () => {
-    if (mode == "save") {
-      navigation.navigate("SavePaymentMethod");
-    } else {
-      navigation.navigate("MakePayment");
-    }
+    navigation.navigate("MakePayment");
   };
-
+  
    return (
      <>
        <SafeAreaView style={{backgroundColor: "#fff"}}>

@@ -25,14 +25,12 @@
   const openFlow = (flowKey) => {
     let options = null;
     let navKey = flowKey;
+
     if (flowKey == "MakePayment") {
       navKey = "Product";
       options = {mode: "normal"};
-    } else if (flowKey == "SavePaymentMethod") {
-      navKey = "Product";
-      options = {mode: "save"};
     }
-    
+
     navigation.navigate(navKey, options); 
   };
 
