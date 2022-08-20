@@ -13,15 +13,29 @@
  } from 'react-native';
  
  const Flows = {
-   "MakePayment": "Make Payment"
- }
+   "MakePayment": "Make Payment",
+   "SavePaymentMethod": "Save Payment Method"
+ };
 
  const Colors = {
   "button_bg" : "#7673dd"
 };
  
  const HeadlessChekout = ({navigation}) => {
- 
+  const openFlow = (flowKey) => {
+    let options = null;
+    let navKey = flowKey;
+    if (flowKey == "MakePayment") {
+      navKey = "Product";
+      options = {mode: "normal"};
+    } else if (flowKey == "SavePaymentMethod") {
+      navKey = "Product";
+      options = {mode: "save"};
+    }
+    
+    navigation.navigate(navKey, options); 
+  };
+
   const renderButtons = () => {
     const views = [];
     for (let flowKey in Flows) {
@@ -39,7 +53,7 @@
         >
           <Button
             onPress= { () => {
-                navigation.navigate("Product");
+                openFlow(flowKey);
               }
             }
             color="white"

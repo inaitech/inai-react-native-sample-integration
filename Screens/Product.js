@@ -16,10 +16,16 @@
     "button_bg" : "#7673dd"
  };
 
- const MakePayment = ({navigation}) => {
+ const MakePayment = ({navigation, route}) => {
+
+  const {mode} = route.params;
 
   const showPaymentOptions = () => {
-    navigation.navigate("MakePayment");
+    if (mode == "save") {
+      navigation.navigate("SavePaymentMethod");
+    } else {
+      navigation.navigate("MakePayment");
+    }
   };
 
    return (
