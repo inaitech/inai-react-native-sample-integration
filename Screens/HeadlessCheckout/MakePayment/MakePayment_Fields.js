@@ -29,17 +29,12 @@
   let [paymentDetails, setPaymentDetails] = useState({});
 
   const submitPayment = () => {
-    console.log(JSON.stringify(paymentDetails));
-    
     let fields = [];
     for(let f in paymentDetails) {
         fields.push({"name": f, value: paymentDetails[f] });
     }
 
     let paymentDetailsFields = {"fields": fields};
-    
-    console.log(JSON.stringify(paymentDetailsFields));
-
     InaiCheckoutModule.makePayment(Constants.token, orderId, Constants.country, 
                       paymentOption.rail_code, paymentDetailsFields).then((response) => {
             Alert.alert(
@@ -65,7 +60,6 @@
   }
 
 const fieldChanged = (formField, val) => {
-  console.log(formField.label + " Changed to " + val);
   paymentDetails[formField.name] = val;
   setPaymentDetails(paymentDetails)
 };
