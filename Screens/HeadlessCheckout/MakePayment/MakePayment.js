@@ -136,7 +136,7 @@
   }, [])
 
   const paymentOptionSelected = (paymentOption) => {
-    navigation.navigate("MakePayment_Fields", {paymentOption, generatedOrderId});
+    navigation.navigate("MakePayment_Fields", {paymentOption, orderId});
   }
 
   const sanitizeRailCode =(railCode) => {
