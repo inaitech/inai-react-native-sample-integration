@@ -18,7 +18,7 @@
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
  };
  
  const MakePaymentWithSavedMethod_Fields = ({navigation, route}) => {

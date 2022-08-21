@@ -8,7 +8,7 @@
 
  import React from "react";
 
- import {useEffect, useState} from "react";
+ import {useState} from "react";
 
  import CheckBox from  "@react-native-community/checkbox";
  import Constants from "./../../../Constants";
@@ -18,7 +18,7 @@
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
  };
  
  const ValidateFields_Fields = ({navigation, route}) => {
@@ -120,7 +120,7 @@ const fieldChanged = (formField, val) => {
                     submitPayment();
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= "Validate"
              />
            </View>

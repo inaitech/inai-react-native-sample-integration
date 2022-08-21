@@ -18,8 +18,8 @@
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : "#7673dd"
-};
+    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
+ };
  
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
@@ -214,7 +214,7 @@ const preapreOrder =
                 }
                 <View style={{backgroundColor: Colors.button_bg, marginTop: 20}}>
                     <Button 
-                        color="white"
+                        color={Colors.button_bg}
                         style={{backgroundColor: Colors.button_bg}}
                         title='Get Card Info' onPress={() => getCardInfo(cardNumber, true)} />
                </View>
