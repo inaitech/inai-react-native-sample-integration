@@ -16,7 +16,8 @@
    "MakePayment": "Make Payment",
    "SavePaymentMethod": "Save A Payment Method",
    "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
-   "ValidateFields": "Validate Fields"
+   "ValidateFields": "Validate Fields",
+   "GetCardInfo": "Get Card Info"
  };
 
  const Colors = {

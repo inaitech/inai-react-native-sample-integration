@@ -71,12 +71,14 @@ const fieldChanged = (formField, val) => {
     onValueChange={val => fieldChanged(formField, val)}
     style={{marginTop: 10, marginBottom: 10}} />;
   }
-
   return  <TextInput 
     style={{
       padding: 10,
       fontSize: 18,
-      borderBottomWidth: 0.2,
+      borderWidth: 1, 
+      marginTop: 10,
+      borderColor: "#ccc",
+      borderRadius: 5,
       height: 44}}
       placeholder={formField.placeholder}
       autoCapitalize="none"
@@ -96,9 +98,7 @@ const fieldChanged = (formField, val) => {
           <View style={{width: "100%",
                   paddingLeft: 10,
                   paddingRight: 10,
-                  paddingTop: 20,
-                  borderBottomWidth: 1,
-                  borderBottomColor: "#cfcfcf"}}>
+                  paddingTop: 20}}>
           <Text style={{fontSize: 18}}>{item.label}</Text>
           {
             InputField(item)

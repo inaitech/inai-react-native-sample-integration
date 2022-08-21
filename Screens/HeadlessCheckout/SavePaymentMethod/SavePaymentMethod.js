@@ -103,9 +103,9 @@
 }
 
  const SavePaymentMethod = ({navigation}) => {
-  const [paymentOptions, setPaymentOptions] = useState([]);
-  const [orderId, setOrderId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  let [paymentOptions, setPaymentOptions] = useState([]);
+  let [orderId, setOrderId] = useState(null);
+  let [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
       async function initData() {

@@ -21,4 +21,9 @@ RCT_EXTERN_METHOD(validateFields:(NSString *)token orderId:(NSString *)orderId
                   paymentDetails:(NSDictionary *)paymentDetails
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(getCardInfo:(NSString *)token orderId:(NSString *)orderId
+                  countryCode:(NSString *)countryCode cardNumber:(NSString *)cardNumber
+                  withResolver:(RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
 @end
