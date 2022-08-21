@@ -26,7 +26,14 @@
   const {paymentOption, orderId} = route.params;
   const paymentFields = paymentOption.form_fields || [];
 
-  let [paymentDetails, setPaymentDetails] = useState({});
+  let initialPaymentDetails = {};
+  for(let pf in paymentFields) {
+    let paymentField = paymentFields[pf];
+    initialPaymentDetails[paymentField.name] =  paymentField.field_type == "checkbox" ? true : "";
+  }
+  
+  let [paymentDetails, setPaymentDetails] = useState(initialPaymentDetails);
+
   const submitPayment = () => {
     let fields = [];
     for(let f in paymentDetails) {
@@ -60,14 +67,16 @@
       });
   }
 
-const fieldChanged = (formField, val) => {
-  paymentDetails[formField.name] = val;
-  setPaymentDetails(paymentDetails)
-};
+  const fieldChanged = (formField, val) => {
+    let newPaymentDetails  = {...paymentDetails};
+    newPaymentDetails[formField.name] = val;
+    setPaymentDetails(newPaymentDetails);
+  };
 
  const InputField = (formField)=> {
   if (formField.field_type == "checkbox") {
     return <CheckBox 
+    value={paymentDetails[formField.name]}
     onValueChange={val => fieldChanged(formField, val)}
     style={{marginTop: 10, marginBottom: 10}} />;
   }
@@ -83,7 +92,8 @@ const fieldChanged = (formField, val) => {
       height: 44}}
       placeholder={formField.placeholder}
       autoCapitalize="none"
-      autoCorrect="false"
+      autoCorrect={false}
+      value={paymentDetails[formField.name]}
       onChangeText ={text => fieldChanged(formField, text)}
     ></TextInput>;
   };
