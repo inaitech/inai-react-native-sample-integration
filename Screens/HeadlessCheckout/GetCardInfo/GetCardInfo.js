@@ -145,7 +145,6 @@ const preapreOrder =
     }
 
     const fieldChanged = (val) => {
-        console.log("Card Number : " + val);
         setCardNumber(val);
         if (val.length > 5) {
             getCardInfo(val);
@@ -156,12 +155,10 @@ const preapreOrder =
 
         if (isLoading) {
             //  Cache this as the next request
-            console.log("Caching request for " + getInfoForCardNumber)
             setPendingCardNumber(getInfoForCardNumber);
             return;
         }
 
-        console.log("Fetching Data for " + getInfoForCardNumber)
         setIsLoading(true);
         InaiCheckoutModule.getCardInfo(Constants.token, orderId, 
             Constants.country, getInfoForCardNumber).then((response) => {
