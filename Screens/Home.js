@@ -17,8 +17,8 @@
    "HeadlessCheckout":  "Headless Checkout"
  }
 
-const Colors = {
-  "button_bg" : "#7673dd"
+ const Colors = {
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
 };
  
  const HomeFlows = ({navigation}) => {   
@@ -42,7 +42,7 @@ const Colors = {
                     navigation.navigate(flowKey);
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= {flow}
              />
            </View>

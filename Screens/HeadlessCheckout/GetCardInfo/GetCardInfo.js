@@ -205,7 +205,7 @@ const preapreOrder =
                         height: 44}}
                         placeholder="Card Number"
                         autoCapitalize="none"
-                        autoCorrect="false"
+                        autoCorrect={false}
                         onChangeText ={text => fieldChanged(text)}/>
 
                 {showCardImage && 

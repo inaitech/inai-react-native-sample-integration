@@ -18,8 +18,8 @@
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : "#7673dd"
- };
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
+};
  
  const MakePayment_Fields = ({navigation, route}) => {
   const { InaiCheckoutModule } = NativeModules;
@@ -82,7 +82,7 @@ const fieldChanged = (formField, val) => {
       height: 44}}
       placeholder={formField.placeholder}
       autoCapitalize="none"
-      autoCorrect="false"
+      autoCorrect={false}
       onChangeText ={text => fieldChanged(formField, text)}
     ></TextInput>;
   };
@@ -120,7 +120,7 @@ const fieldChanged = (formField, val) => {
                     submitPayment();
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= "Checkout"
              />
            </View>

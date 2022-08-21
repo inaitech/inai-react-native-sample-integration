@@ -82,7 +82,7 @@ const fieldChanged = (formField, val) => {
       height: 44}}
       placeholder={formField.placeholder}
       autoCapitalize="none"
-      autoCorrect="false"
+      autoCorrect={false}
       onChangeText ={text => fieldChanged(formField, text)}
     ></TextInput>;
   };

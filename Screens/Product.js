@@ -13,8 +13,8 @@
  } from 'react-native';
  
  const Colors = {
-    "button_bg" : "#7673dd"
- };
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
+};
 
  const Product = ({navigation, route}) => {
 
@@ -44,9 +44,7 @@
          <Text style={{textAlign: 'center', width: "100%", fontSize: 16, fontWeight:"500"}}>MANCHESTER UNITED 21/22 HOME JERSEY</Text>
          <Text style={{textAlign: 'center'}}>{`
 A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
-Youth. Courage. Success. The thee pillars of Manchester United's motto have brought the club more than a century of triumphs. With its clean red design and white ribbed crewneck, this juniors' adidas football jersey takes inspiration from the iconic kit that carried them to some of their most memorable moments. Made for fans, its soft fabric and moisture-absorbing AEROREADY keep you comfortable. A devil signoff on the back shows your pride.
 
-This product is made with Primegreen, a series of high-performance recycled materials.
 `}</Text>
          <View
              style={{
@@ -62,7 +60,7 @@ This product is made with Primegreen, a series of high-performance recycled mate
                     showPaymentOptions();
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= "Buy Now"
              />
            </View>

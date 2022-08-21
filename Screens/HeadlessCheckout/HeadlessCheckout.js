@@ -21,7 +21,7 @@
  };
 
  const Colors = {
-  "button_bg" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
 };
  
  const HeadlessChekout = ({navigation}) => {
@@ -61,7 +61,7 @@
                 openFlow(flowKey);
               }
             }
-            color="white"
+            color={Colors.button_bg}
             title= {flow}
           />
         </View>
