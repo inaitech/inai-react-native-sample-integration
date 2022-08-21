@@ -6,7 +6,7 @@ import io.inai.android_sdk.*
 import org.json.JSONObject
 
 class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext),
-    InaiCheckoutDelegate, InaiValidateFieldsDelegate {
+    InaiCheckoutDelegate, InaiValidateFieldsDelegate, InaiCardInfoDelegate {
 
     private var paymentCallback: Promise? = null
 
@@ -45,7 +45,7 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
                 }
             }
         } catch (e: Exception) {
-            Log.e("er", "Exception: $e")
+            promise.reject("Init failed. " + e.message)
         }
     }
 
@@ -59,16 +59,9 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         promise: Promise
     ) {
         this.paymentCallback = promise
-        val styles = InaiConfigStyles(
-            container = InaiConfigStylesContainer(backgroundColor = "#efefef"),
-            cta = InaiConfigStylesCta(backgroundColor = "#53509a"),
-            errorText = InaiConfigStylesErrorText(color = "#000000")
-        )
-
         val config = InaiConfig(
             token = inaiToken,
             orderId = orderId,
-            styles = styles,
             countryCode = countryCode,
         )
         try {
@@ -80,8 +73,47 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
                 }
             }
         } catch (e: Exception) {
-            Log.e("er", "Exception: $e")
+            promise.reject("Init failed. " + e.message)
         }
+    }
+
+    @ReactMethod
+    fun getCardInfo(
+        inaiToken: String,
+        orderId: String,
+        countryCode: String,
+        cardNumber: String,
+        promise: Promise
+    ) {
+        this.paymentCallback = promise
+        val config = InaiConfig(
+            token = inaiToken,
+            orderId = orderId,
+            countryCode = countryCode,
+        )
+        try {
+            val checkout = InaiCheckout(config)
+            currentActivity.let {
+                if (it != null) {
+                    checkout.getCardInfo(cardNumber, it, this)
+                }
+            }
+        } catch (e: Exception) {
+            promise.reject("Init failed. " + e.message)
+        }
+    }
+
+    override fun cardInfoFetched(result: InaiCardInfoResult) {
+        val resultData = JSONObject()
+        var status = "failed"
+        if (result.status == InaiCardInfoStatus.Success){
+            status = "success"
+        }
+        resultData.put("status", status)
+        resultData.put("data", result.data)
+
+        val jsonMap = convertJSONToWritableMap(resultData)
+        paymentCallback?.resolve(jsonMap)
     }
 
     override fun paymentFinished(result: InaiPaymentResult) {
