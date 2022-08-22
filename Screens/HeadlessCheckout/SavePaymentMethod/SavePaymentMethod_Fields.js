@@ -35,6 +35,32 @@
   
   let [paymentDetails, setPaymentDetails] = useState(initialPaymentDetails);
 
+  let initialInputValidations = {};
+  for (let pf in paymentFields) {
+    let paymentField = paymentFields[pf];
+    if (paymentField.field_type !== "checkbox" && paymentField.validations.required) {
+      initialInputValidations[paymentField.name] = { borderColor: "#ccc", isNonEmpty: false, isValid: false };
+    }
+  }
+  let [inputValidations, setInputValidations] = useState(initialInputValidations);
+
+  const validateForm = () => {
+    let areFormInputsValid = true;
+    let areRequiredInputsFilled = true;
+
+    for (let f in inputValidations) {
+      let formField = inputValidations[f];
+      if (!formField.isNonEmpty) areRequiredInputsFilled = false;
+      if (!formField.isValid) areFormInputsValid = false;
+    }
+
+    if (areFormInputsValid && areRequiredInputsFilled) {
+      submitPayment();
+    } else {
+      Alert.alert("Please enter valid details");
+    }
+  }
+
   const submitPayment = () => {
     let fields = [];
     for(let f in paymentDetails) {
@@ -71,7 +97,46 @@
     let newPaymentDetails  = {...paymentDetails};
     newPaymentDetails[formField.name] = val;
     setPaymentDetails(newPaymentDetails);
+    if (formField.required) {
+      verifyInputs(formField, val)
+    }
   };
+
+  const verifyInputs = (formField, inputText) => {
+    let maxLength = formField.validations.max_length ? formField.validations.max_length : 10;
+    let minLength = formField.validations.min_length ? formField.validations.min_length : 0;
+    let pattern = formField.validations.input_mask_regex ? formField.validations.input_mask_regex : "\.*";
+    let inputRegex = new RegExp(pattern);
+    let newValidations = { ...inputValidations }
+
+    const validInput = () => {
+      newValidations[formField.name].borderColor = "green";
+      newValidations[formField.name].isNonEmpty = true;
+      newValidations[formField.name].isValid = true;
+    }
+
+    const invalidInput = () => {
+      newValidations[formField.name].borderColor = "red";
+      newValidations[formField.name].isValid = false;
+    }
+
+    const isEmpty = () => {
+      newValidations[formField.name].borderColor = "red";
+      newValidations[formField.name].isNonEmpty = false;
+    }
+
+    if (inputText.length == 0) {
+      isEmpty();
+    } else if (inputText.length < minLength || inputText.length > maxLength) {
+      invalidInput();
+    } else if (!inputRegex.test(inputText)) {
+      invalidInput();
+    } else {
+      validInput();
+    }
+    setInputValidations(newValidations);
+
+  }
 
  const InputField = (formField)=> {
   if (formField.field_type == "checkbox") {
@@ -88,7 +153,7 @@
       fontSize: 18,
       borderWidth: 1, 
       marginTop: 10,
-      borderColor: "#ccc",
+      borderColor: formField.required ? inputValidations[formField.name].borderColor : "#ccc",
       borderRadius: 5,
       height: 44}}
       placeholder={formField.placeholder}
@@ -129,7 +194,7 @@
            >
              <Button
                onPress= { () => {
-                    submitPayment();
+                    validateForm();
                  }
                }
                color={Colors.button_bg}
