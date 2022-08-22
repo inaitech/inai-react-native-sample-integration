@@ -12,6 +12,7 @@
 
  import CheckBox from  "@react-native-community/checkbox";
  import Constants from "./../../../Constants";
+ import ExpiryDate from "./ExpiryDate";
  
  import {
    SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
@@ -78,6 +79,8 @@
     value={paymentDetails[formField.name]}
     onValueChange={val => fieldChanged(formField, val)}
     style={{marginTop: 10, marginBottom: 10}} />;
+  }else if(formField.name == "expiry"){
+    return <ExpiryDate onCardExpiryValueChanged={fieldChanged} formFieldObject={formField}/>
   }
   return  <TextInput 
     style={{

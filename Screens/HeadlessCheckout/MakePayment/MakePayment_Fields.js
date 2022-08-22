@@ -16,6 +16,7 @@
  import {
    SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
  } from 'react-native';
+import ExpiryDate from "./ExpiryDate";
  
  const Colors = {
   "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
@@ -77,6 +78,8 @@ const fieldChanged = (formField, val) => {
     value={paymentDetails[formField.name]}
     onValueChange={val => fieldChanged(formField, val)}
     style={{marginTop: 10, marginBottom: 10}} />;
+  }else if(formField.name == "expiry"){
+    return <ExpiryDate onCardExpiryValueChanged={fieldChanged} formFieldObject={formField}/>
   }
 
   return  <TextInput 
