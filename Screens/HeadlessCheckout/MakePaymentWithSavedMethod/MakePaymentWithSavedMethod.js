@@ -102,9 +102,7 @@
       async function initData() {
         //  Load order id
         let storedCustomerId = await getStoredCustomerId();
-        if (storedCustomerId) {
-          postData.customer.id = storedCustomerId;
-        } else {
+        if (!storedCustomerId) {
           Alert.alert(
             "Alert",
             "No Saved Payment methods.",
