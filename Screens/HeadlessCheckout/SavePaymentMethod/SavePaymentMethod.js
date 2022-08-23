@@ -142,6 +142,12 @@
     navigation.navigate("SavePaymentMethod_Fields", {paymentOption, orderId});
   }
 
+  const sanitizeRailCode =(railCode) => {
+    let cleanStr = railCode.replace(/_/g, "");
+    let capitalizedStr = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1);
+    return capitalizedStr;
+  };
+
    return (
        <SafeAreaView style={{flex: 1, backgroundColor: "#fff" }}>
         <FlatList
@@ -156,7 +162,7 @@
               padding: 10,
               fontSize: 18,
               height: 44}}
-            >{item.rail_code}</Text>
+            >{sanitizeRailCode(item.rail_code)}</Text>
           </TouchableOpacity>
         }
         />
