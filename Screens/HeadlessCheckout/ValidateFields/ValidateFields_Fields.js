@@ -48,9 +48,7 @@
               "Result",
               JSON.stringify(response),
               [
-                {text: 'OK', onPress: () => { 
-                  navigation.navigate("Home");
-                }},
+                {text: 'OK', onPress: () => {}},
               ]
             );
       }).catch((err) => {
@@ -58,9 +56,7 @@
           "Result",
           JSON.stringify(err),
           [
-            {text: 'OK', onPress: () => { 
-              navigation.navigate("Home");
-            }},
+            {text: 'OK', onPress: () => {}},
           ]
         );
       });

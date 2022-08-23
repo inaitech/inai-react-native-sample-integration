@@ -94,6 +94,8 @@ const preapreOrder =
 
     let [cardNumber, setCardNumber] = useState("");
     let [isLoading, setIsLoading] = useState(true);
+    let [showActivityIndicator, setShowActivityIndicator] = useState(true);
+
     let [orderId, setOrderId] = useState(null);
     let [pendingCardNumber, setPendingCardNumber] = useState(null);
     let [showCardImage, setShowCardImage] = useState(false);
@@ -127,6 +129,7 @@ const preapreOrder =
             );
           }
           setIsLoading(false);
+          setShowActivityIndicator(false);
         }
   
         initData();
@@ -160,10 +163,16 @@ const preapreOrder =
             return;
         }
 
+        if (showResultAlert) {
+            setShowActivityIndicator(true);
+        }
+        
         setIsLoading(true);
+        
         InaiCheckoutModule.getCardInfo(Constants.token, orderId, 
             Constants.country, getInfoForCardNumber).then((response) => {
                 setIsLoading(false);
+                setShowActivityIndicator(false);
                 if (showResultAlert){
                     Alert.alert(
                         "Result",
@@ -182,6 +191,7 @@ const preapreOrder =
                 }
             }).catch((err) => {
             setIsLoading(false);
+            setShowActivityIndicator(false);
             Alert.alert(
                 "Error",
                 JSON.stringify(err),
@@ -217,7 +227,7 @@ const preapreOrder =
                         title='Get Card Info' onPress={() => getCardInfo(cardNumber, true)} />
                </View>
             </View>
-            {isLoading &&
+            {showActivityIndicator &&
             <View style={{  
                         position: "absolute", 
                         backgroundColor: "#F5FCFF88",
