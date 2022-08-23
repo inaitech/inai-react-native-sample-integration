@@ -49,7 +49,7 @@ A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
 `}</Text>
          <View
              style={{
-               backgroundColor: Colors.button_bg, 
+               backgroundColor: Colors.button_container_bg, 
                marginLeft: 15, 
                borderRadius: 5,
                marginRight: 15, 
