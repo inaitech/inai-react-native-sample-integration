@@ -85,7 +85,7 @@
      return id;
  }
 
- const getPaymentOptions = async () => {        
+ const getPaymentOptions = async (orderId) => {        
   const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
   const requestOptions = {
       method: "GET",
