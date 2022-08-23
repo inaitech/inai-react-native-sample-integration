@@ -132,7 +132,6 @@ const preapreOrder =
     }, []);
     
     const processCardInfoResult = (result) => {
-        console.log(JSON.stringify(result));
         let status = result.status;
         let cardImage = "unknown_card.png";
         if (status == "success") {
