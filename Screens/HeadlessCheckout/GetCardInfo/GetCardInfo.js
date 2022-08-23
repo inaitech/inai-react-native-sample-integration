@@ -17,9 +17,10 @@
    SafeAreaView, Alert, Button, View, Image, TextInput, ActivityIndicator, NativeModules
  } from 'react-native';
  
- const Colors = {
-    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
- };
+const Colors = {
+    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+    "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
+};
  
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
@@ -209,7 +210,7 @@ const preapreOrder =
                  <Image source={cardImagePath} 
                     style={{ position:"absolute", right: 20, top: 26, width: 60, height: 30, resizeMode: 'contain' }} />
                 }
-                <View style={{backgroundColor: Colors.button_bg, marginTop: 20}}>
+                <View style={{backgroundColor: Colors.button_container_bg, marginTop: 20}}>
                     <Button 
                         color={Colors.button_bg}
                         style={{backgroundColor: Colors.button_bg}}

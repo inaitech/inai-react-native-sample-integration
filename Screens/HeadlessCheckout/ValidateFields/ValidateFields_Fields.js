@@ -18,7 +18,8 @@
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
  };
  
  const ValidateFields_Fields = ({navigation, route}) => {
@@ -117,7 +118,7 @@
         />
           <View
              style={{
-               backgroundColor: Colors.button_bg, 
+               backgroundColor: Colors.button_container_bg, 
                marginLeft: 15, 
                borderRadius: 5,
                marginRight: 15, 

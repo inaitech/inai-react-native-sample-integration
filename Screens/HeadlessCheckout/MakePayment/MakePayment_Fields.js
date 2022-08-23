@@ -19,7 +19,8 @@ import {
 import ExpiryDate from "./ExpiryDate";
 
 const Colors = {
-  "button_bg": Platform.OS === 'ios' ? "white" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
 };
 
 const MakePayment_Fields = ({ navigation, route }) => {
