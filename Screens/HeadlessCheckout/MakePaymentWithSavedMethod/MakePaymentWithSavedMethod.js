@@ -42,29 +42,15 @@
 
  const preapreOrder =
     async () => {        
+
+    let storedCustomerId = await getStoredCustomerId();
      let postData = {
          "amount": Constants.amount,
          "currency": Constants.currency,
          "description": "Acme Shirt",
          "metadata": {"test_order_id": "5735"},
-         "customer" : {}
+         "customer" : {"id": storedCustomerId}
      };
-
-     let storedCustomerId = await getStoredCustomerId();
-     if (storedCustomerId) {
-      postData.customer.id = storedCustomerId;
-     } else {
-      Alert.alert(
-        "Alert",
-        "No Saved Payment methods found.",
-        [
-          {text: 'OK', onPress: () => { 
-            navigation.navigate("Home");
-          }},
-        ]
-      );
-      return;
-     }
 
      const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
      const requestOptions = {
@@ -79,6 +65,7 @@
      const ordersUrl = `${Constants.base_url}/orders`;
      const response = await fetch(ordersUrl, requestOptions);
      const jsonData = await response.json();
+     console.log("jsonData: " + JSON.stringify(jsonData));
      
      let id = jsonData.id || null;
      if(id != null) {
@@ -114,6 +101,22 @@
   useEffect(() => {
       async function initData() {
         //  Load order id
+        let storedCustomerId = await getStoredCustomerId();
+        if (storedCustomerId) {
+          postData.customer.id = storedCustomerId;
+        } else {
+          Alert.alert(
+            "Alert",
+            "No Saved Payment methods.",
+            [
+              {text: 'OK', onPress: () => { 
+                navigation.navigate("Home");
+              }},
+            ]
+          );
+          return;
+        }
+
         let generatedOrderId = await preapreOrder();
         if (generatedOrderId!= null) {
           //  Load the payment options data
