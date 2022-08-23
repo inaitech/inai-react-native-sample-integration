@@ -196,7 +196,7 @@ const MakePaymentWithSavedMethod_Fields = ({ navigation, route }) => {
       />
       <View
         style={{
-          backgroundColor: Colors.button_bg,
+          backgroundColor: Colors.button_container_bg,
           marginLeft: 15,
           borderRadius: 5,
           marginRight: 15,
