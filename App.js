@@ -60,7 +60,7 @@
 
             <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
 
-            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In CHeckout" }} />
+            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
             
         </Stack.Navigator>
      </NavigationContainer>
