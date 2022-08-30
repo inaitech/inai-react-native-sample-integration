@@ -42,25 +42,15 @@
 
  const preapreOrder =
     async () => {        
+
+    let storedCustomerId = await getStoredCustomerId();
      let postData = {
          "amount": Constants.amount,
          "currency": Constants.currency,
          "description": "Acme Shirt",
          "metadata": {"test_order_id": "5735"},
-         "customer" : {}
+         "customer" : {"id": storedCustomerId}
      };
-
-     let storedCustomerId = await getStoredCustomerId();
-     if (storedCustomerId) {
-      postData.customer.id = storedCustomerId;
-     } else {
-      postData.customer = {
-            "email": "testdev@test.com",
-             "first_name": "Dev",
-             "last_name": "Smith",
-             "contact_number": "01010101010"
-            };
-     }
 
      const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
      const requestOptions = {
@@ -75,6 +65,7 @@
      const ordersUrl = `${Constants.base_url}/orders`;
      const response = await fetch(ordersUrl, requestOptions);
      const jsonData = await response.json();
+     console.log("jsonData: " + JSON.stringify(jsonData));
      
      let id = jsonData.id || null;
      if(id != null) {
@@ -84,7 +75,7 @@
      return id;
  }
 
- const getPaymentOptions = async (orderId) => {        
+ const getCustomerPayments = async () => {        
   const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
   const requestOptions = {
       method: "GET",
@@ -94,14 +85,15 @@
               }
   };
 
-  const url = `${Constants.base_url}/payment-method-options?order_id=${orderId}&country=${Constants.country}`;
+  let storedCustomerId = await getStoredCustomerId();
+  const url = `${Constants.base_url}/customers/${storedCustomerId}/payment-methods`;
   const response = await fetch(url, requestOptions);
   const jsonData = await response.json();
-  let payment_method_options = jsonData.payment_method_options || [];
+  let payment_method_options = jsonData.payment_methods || [];
   return payment_method_options;
 }
 
- const MakePayment = ({navigation}) => {
+ const MakePaymentWithSavedMethod = ({navigation}) => {
   const [paymentOptions, setPaymentOptions] = useState([]);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -109,10 +101,24 @@
   useEffect(() => {
       async function initData() {
         //  Load order id
+        let storedCustomerId = await getStoredCustomerId();
+        if (!storedCustomerId) {
+          Alert.alert(
+            "Alert",
+            "No Saved Payment methods.",
+            [
+              {text: 'OK', onPress: () => { 
+                navigation.navigate("Home");
+              }},
+            ]
+          );
+          return;
+        }
+
         let generatedOrderId = await preapreOrder();
         if (generatedOrderId!= null) {
           //  Load the payment options data
-          let payment_method_options = await getPaymentOptions(generatedOrderId);
+          let payment_method_options = await getCustomerPayments(generatedOrderId);
           
           if (payment_method_options.length > 0) {
             setOrderId(generatedOrderId);
@@ -135,14 +141,64 @@
       initData();
   }, [])
 
-  const paymentOptionSelected = (paymentOption) => {
-    navigation.navigate("MakePayment_Fields", {paymentOption, orderId});
+
+  const getPaymentOptions = async () => {
+    const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
+    const requestOptions = {
+        method: "GET",
+        headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": authStr
+                }
+    };
+
+    const url = `${Constants.base_url}/payment-method-options?order_id=${orderId}&country=${Constants.country}&saved_payment_method=true`;
+    const response = await fetch(url, requestOptions);
+    const jsonData = await response.json();
+    let payment_method_options = jsonData.payment_method_options || [];
+    return payment_method_options;
+  };
+
+  const paymentOptionSelected = async (paymentOption) => {
+    
+    let customerPaymentMethodOptions = await getPaymentOptions();
+    
+    //  match our payment option  
+    let customerPaymentMethod = customerPaymentMethodOptions.find((cpm) => cpm.rail_code == paymentOption.type);
+    if (customerPaymentMethod) {
+      customerPaymentMethod.paymentMethodId = paymentOption.id
+      navigation.navigate("MakePaymentWithSavedMethod_Fields", {paymentOption: customerPaymentMethod, orderId});
+    } else {
+      Alert.alert(
+        "Error",
+        "Error while loading saved payment method details.",
+        [
+          {text: 'OK', onPress: () => { 
+            //  navigation.navigate("Home");
+          }},
+        ]
+      );
+    }
   }
 
-  const sanitizeRailCode =(railCode) => {
+  constsanitizeRailCode =(railCode) => {
     let cleanStr = railCode.replace(/_/g, "");
     let capitalizedStr = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1);
     return capitalizedStr;
+  };
+
+  const sanitizePaymentMethod = (paymentMethod) => {
+    let paymentMethodType = paymentMethod.type;
+    let retVal = paymentMethodType;
+    if (paymentMethodType == "card") {
+        let cardDetails = paymentMethod["card"];
+        if (cardDetails) {
+          let cardName = cardDetails["brand"];
+          let last4 = cardDetails["last_4"];
+          retVal = `${cardName} - ${last4}`;
+        }
+    }
+    return retVal;
   };
 
    return (
@@ -150,7 +206,7 @@
         <FlatList
         style={{paddingTop: 10}}
           data={paymentOptions}
-          keyExtractor={(item, index) => item.rail_code }
+          keyExtractor={(item, index) => item.id }
           renderItem={({item}) => 
           <TouchableOpacity onPress={()=> paymentOptionSelected(item)} 
             style={{borderBottomWidth: 1, borderBottomColor: "#cfcfcf"}}>
@@ -159,7 +215,7 @@
               padding: 10,
               fontSize: 18,
               height: 44}}
-            >{sanitizeRailCode(item.rail_code)}</Text>
+            >{sanitizePaymentMethod(item)}</Text>
           </TouchableOpacity>
         }
         />
@@ -178,5 +234,5 @@
    );
  };
 
- export default MakePayment;
+ export default MakePaymentWithSavedMethod;
  

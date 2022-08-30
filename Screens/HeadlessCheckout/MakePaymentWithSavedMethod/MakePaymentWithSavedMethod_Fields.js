@@ -8,30 +8,30 @@
 
 import React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CheckBox from "@react-native-community/checkbox";
 import Constants from "./../../../Constants";
+import ExpiryDate from "./ExpiryDate";
 
 import {
   SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
 } from 'react-native';
-import ExpiryDate from "./ExpiryDate";
 
 const Colors = {
   "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
   "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
 };
 
-const MakePayment_Fields = ({ navigation, route }) => {
+const MakePaymentWithSavedMethod_Fields = ({ navigation, route }) => {
   const { InaiCheckoutModule } = NativeModules;
   const { paymentOption, orderId } = route.params;
-  const paymentFields = paymentOption.form_fields;
+  const paymentFields = paymentOption.form_fields || [];
 
   let initialPaymentDetails = {};
   for (let pf in paymentFields) {
     let paymentField = paymentFields[pf];
-    initialPaymentDetails[paymentField.name] = paymentField.field_type == "checkbox" ? false : "";
+    initialPaymentDetails[paymentField.name] = paymentField.field_type == "checkbox" ? true : "";
   }
 
   let [paymentDetails, setPaymentDetails] = useState(initialPaymentDetails);
@@ -69,6 +69,8 @@ const MakePayment_Fields = ({ navigation, route }) => {
     }
 
     let paymentDetailsFields = { "fields": fields };
+    paymentDetailsFields["paymentMethodId"] = paymentOption.paymentMethodId;
+
     InaiCheckoutModule.makePayment(Constants.token, orderId, Constants.country,
       paymentOption.rail_code, paymentDetailsFields).then((response) => {
         Alert.alert(
@@ -105,7 +107,6 @@ const MakePayment_Fields = ({ navigation, route }) => {
       verifyInputs(formField, val)
     }
   };
-
 
   const verifyInputs = (formField, inputText) => {
     let maxLength = formField.validations.max_length ? formField.validations.max_length : 10;
@@ -144,7 +145,6 @@ const MakePayment_Fields = ({ navigation, route }) => {
   }
 
   const InputField = (formField) => {
-
     if (formField.field_type == "checkbox") {
       return <CheckBox
         value={paymentDetails[formField.name]}
@@ -153,6 +153,7 @@ const MakePayment_Fields = ({ navigation, route }) => {
     } else if (formField.name == "expiry") {
       return <ExpiryDate onCardExpiryValueChanged={fieldChanged} formFieldObject={formField} />
     }
+
 
     return <TextInput
       style={{
@@ -208,12 +209,12 @@ const MakePayment_Fields = ({ navigation, route }) => {
             validateForm();
           }
           }
-          color={Colors.button_bg}
-          title="Checkout"
+          color="white"
+          title="Pay with Saved Payment Method"
         />
       </View>
     </SafeAreaView>
   );
 };
 
-export default MakePayment_Fields;
+export default MakePaymentWithSavedMethod_Fields;
