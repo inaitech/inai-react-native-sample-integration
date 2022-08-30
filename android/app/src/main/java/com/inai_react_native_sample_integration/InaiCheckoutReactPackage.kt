@@ -1,6 +1,5 @@
 package com.inai_react_native_sample_integration
 
-import InaiCheckoutModule
 import android.view.View
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

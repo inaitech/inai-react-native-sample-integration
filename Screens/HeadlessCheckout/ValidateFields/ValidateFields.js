@@ -101,10 +101,10 @@
   return payment_method_options;
 }
 
- const MakePayment = ({navigation}) => {
-  const [paymentOptions, setPaymentOptions] = useState([]);
-  const [orderId, setOrderId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+ const ValidateFields = ({navigation}) => {
+  let [paymentOptions, setPaymentOptions] = useState([]);
+  let [orderId, setOrderId] = useState(null);
+  let [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
       async function initData() {
@@ -116,6 +116,8 @@
           
           if (payment_method_options.length > 0) {
             setOrderId(generatedOrderId);
+            payment_method_options = payment_method_options.filter(
+              (pmo) => pmo.rail_code.toLowerCase() !== "apple pay" && pmo.rail_code.toLowerCase() !== "google pay");
             setPaymentOptions(payment_method_options);
           }
         } else {
@@ -136,7 +138,7 @@
   }, [])
 
   const paymentOptionSelected = (paymentOption) => {
-    navigation.navigate("MakePayment_Fields", {paymentOption, orderId});
+    navigation.navigate("ValidateFields_Fields", {paymentOption, orderId});
   }
 
   const sanitizeRailCode =(railCode) => {
@@ -178,5 +180,5 @@
    );
  };
 
- export default MakePayment;
+ export default ValidateFields;
  

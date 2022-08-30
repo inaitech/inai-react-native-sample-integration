@@ -13,9 +13,28 @@
  import HeadlessCheckout from  "./Screens/HeadlessCheckout/HeadlessCheckout";
  import Product from "./Screens/Product";
  
+ // Make Paymnent Screens
  import MakePayment from "./Screens/HeadlessCheckout/MakePayment/MakePayment";
  import MakePayment_Fields from "./Screens/HeadlessCheckout/MakePayment/MakePayment_Fields";
  
+ // Save Paymnent Method Screens
+ import SavePaymentMethod from "./Screens/HeadlessCheckout/SavePaymentMethod/SavePaymentMethod";
+ import SavePaymentMethod_Fields from "./Screens/HeadlessCheckout/SavePaymentMethod/SavePaymentMethod_Fields";
+
+ // Make Payment With Saved Method
+ import MakePaymentWithSavedMethod from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod";
+ import MakePaymentWithSavedMethod_Fields from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod_Fields";
+ 
+ //  Validate Fields
+ import ValidateFields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields";
+ import ValidateFields_Fields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields_Fields";
+
+ // Get Card Info
+ import GetCardInfo from "./Screens/HeadlessCheckout/GetCardInfo/GetCardInfo";
+
+ //Drop In Checkput
+ import DropInCheckout from "./Screens/DropIn/DropInCheckout";
+
  const Stack = createNativeStackNavigator();
 
  const App = () => {
@@ -27,9 +46,22 @@
             <Stack.Screen name="HeadlessCheckout" component={HeadlessCheckout} options={{ title: "Headless Checkout"}} />
             <Stack.Screen name="Product" component={Product} options={{ title: "Product" }} />
 
-            <Stack.Screen name="MakePayment" component={MakePayment} options={{ title: "Payment Options" }} />
+            <Stack.Screen name="MakePayment" component={MakePayment} options={{ title: "Payment Methods" }} />
             <Stack.Screen name="MakePayment_Fields" component={MakePayment_Fields} options={{ title: "Payment" }} />
 
+            <Stack.Screen name="SavePaymentMethod" component={SavePaymentMethod} options={{ title: "Payment Methods" }} />
+            <Stack.Screen name="SavePaymentMethod_Fields" component={SavePaymentMethod_Fields} options={{ title: "Save Payment Method" }} />
+
+            <Stack.Screen name="MakePaymentWithSavedMethod" component={MakePaymentWithSavedMethod} options={{ title: "Saved Payment Methods" }} />
+            <Stack.Screen name="MakePaymentWithSavedMethod_Fields" component={MakePaymentWithSavedMethod_Fields} options={{ title: "Payment" }} />
+
+            <Stack.Screen name="ValidateFields" component={ValidateFields} options={{ title: "Payment Methods" }} />
+            <Stack.Screen name="ValidateFields_Fields" component={ValidateFields_Fields} options={{ title: "Validate Fields" }} />
+
+            <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
+
+            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
+            
         </Stack.Navigator>
      </NavigationContainer>
    );
