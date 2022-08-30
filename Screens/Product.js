@@ -16,12 +16,14 @@
     "button_bg" : "#7673dd"
  };
 
- const MakePayment = ({navigation}) => {
+ const MakePayment = ({navigation, route}) => {
+
+  const {mode} = route.params;
 
   const showPaymentOptions = () => {
     navigation.navigate("MakePayment");
   };
-
+  
    return (
      <>
        <SafeAreaView style={{backgroundColor: "#fff"}}>
