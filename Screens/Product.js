@@ -12,8 +12,9 @@
    SafeAreaView, Button, Image, Text, View
  } from 'react-native';
  
- const Colors = {
-  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
+const Colors = {
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
 };
 
  const Product = ({navigation, route}) => {
@@ -48,7 +49,7 @@ A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
 `}</Text>
          <View
              style={{
-               backgroundColor: Colors.button_bg, 
+               backgroundColor: Colors.button_container_bg, 
                marginLeft: 15, 
                borderRadius: 5,
                marginRight: 15, 
