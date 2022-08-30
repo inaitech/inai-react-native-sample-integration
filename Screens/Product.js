@@ -24,7 +24,9 @@ const Colors = {
   const showPaymentOptions = () => {
     if (mode == "payWithSavedMethod") {
       navigation.navigate("MakePaymentWithSavedMethod");
-    } else {
+    } else if(mode == "dropInCheckout"){
+      navigation.navigate("DropInCheckout");
+    } else{
       navigation.navigate("MakePayment");
     }
   };
