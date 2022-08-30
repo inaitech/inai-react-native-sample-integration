@@ -12,6 +12,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		28D8367528B0054E00A5C987 /* RCTBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D8367328B0054E00A5C987 /* RCTBridge.m */; };
+		28D8367628B0054E00A5C987 /* InaiCheckoutModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8367428B0054E00A5C987 /* InaiCheckoutModule.swift */; };
 		7699B88040F8A987B510C191 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,12 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = inai_react_native_sample_integration/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inai_react_native_sample_integration/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D8366F28B0054D00A5C987 /* inai_react_native_sample_integration-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inai_react_native_sample_integration-Bridging-Header.h"; sourceTree = "<group>"; };
+		28D8367028B0054E00A5C987 /* InaiCheckoutModule-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InaiCheckoutModule-Bridging-Header.h"; sourceTree = "<group>"; };
+		28D8367128B0054E00A5C987 /* inai_reactnative_63-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "inai_reactnative_63-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		28D8367228B0054E00A5C987 /* inai_reactnative_63-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "inai_reactnative_63-Bridging-Header.h"; sourceTree = "<group>"; };
+		28D8367328B0054E00A5C987 /* RCTBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTBridge.m; sourceTree = "<group>"; };
+		28D8367428B0054E00A5C987 /* InaiCheckoutModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InaiCheckoutModule.swift; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-inai_react_native_sample_integration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration.debug.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-inai_react_native_sample_integration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration.release.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration/Pods-inai_react_native_sample_integration.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig"; path = "Target Support Files/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests/Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +100,12 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				28D8367228B0054E00A5C987 /* inai_reactnative_63-Bridging-Header.h */,
+				28D8367128B0054E00A5C987 /* inai_reactnative_63-tvOS-Bridging-Header.h */,
+				28D8367028B0054E00A5C987 /* InaiCheckoutModule-Bridging-Header.h */,
+				28D8367428B0054E00A5C987 /* InaiCheckoutModule.swift */,
+				28D8367328B0054E00A5C987 /* RCTBridge.m */,
+				28D8366F28B0054D00A5C987 /* inai_react_native_sample_integration-Bridging-Header.h */,
 			);
 			name = inai_react_native_sample_integration;
 			sourceTree = "<group>";
@@ -207,7 +221,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -412,6 +426,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D8367628B0054E00A5C987 /* InaiCheckoutModule.swift in Sources */,
+				28D8367528B0054E00A5C987 /* RCTBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -432,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -459,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = inai_react_native_sample_integrationTests/Info.plist;
@@ -499,6 +517,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = inai_react_native_sample_integration;
+				SWIFT_OBJC_BRIDGING_HEADER = "inai_react_native_sample_integration-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -524,6 +543,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = inai_react_native_sample_integration;
+				SWIFT_OBJC_BRIDGING_HEADER = "inai_react_native_sample_integration-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
