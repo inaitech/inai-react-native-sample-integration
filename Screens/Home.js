@@ -14,11 +14,28 @@
  
  // Add more flows here
  const Flows = {
-   "HeadlessCheckout":  "Headless Checkout"
+   "HeadlessCheckout":  "Headless Checkout",
+   "DropInCheckout": "Drop In Checkout"
  }
 
-const Colors = {
-  "button_bg" : "#7673dd"
+ const Colors = {
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
+};
+
+const openFlow = (flowKey, navigation) => {
+  let options = null;
+  let navKey = flowKey;
+
+  if (flowKey == "HeadlessCheckout") {
+    //  Load Headless flows view 
+    navigation.navigate(flowKey);
+  } else if (flowKey == "DropInCheckout") {
+    //  Load product view with pay with saved method mode
+    navKey = "Product";
+    options = {mode: "dropInCheckout"};
+  } 
+  navigation.navigate(navKey, options); 
 };
  
  const HomeFlows = ({navigation}) => {   
@@ -30,7 +47,7 @@ const Colors = {
            <View
              key={flowKey}
              style={{
-               backgroundColor: Colors.button_bg, 
+               backgroundColor: Colors.button_container_bg, 
                marginLeft: 15, 
                borderRadius: 5,
                marginRight: 15, 
@@ -39,10 +56,10 @@ const Colors = {
            >
              <Button
                onPress= { () => {
-                    navigation.navigate(flowKey);
+                    openFlow(flowKey, navigation);
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= {flow}
              />
            </View>
