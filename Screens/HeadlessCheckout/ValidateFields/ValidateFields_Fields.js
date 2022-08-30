@@ -14,16 +14,19 @@
  import Constants from "./../../../Constants";
 
  import {
-   SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
+   SafeAreaView, FlatList, TextInput, NativeModules,ActivityIndicator, Text, View, Alert, Button
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
  };
  
  const ValidateFields_Fields = ({navigation, route}) => {
   const { InaiCheckoutModule } = NativeModules;
   let {paymentOption, orderId} = route.params;
+  let [isLoading, setIsLoading] = useState(false);
+
   let paymentFields = paymentOption.form_fields.filter((f) => f.name !== "save_card");
 
   let initialPaymentDetails = {};
@@ -34,32 +37,31 @@
   
   let [paymentDetails, setPaymentDetails] = useState(initialPaymentDetails);
 
-  const submitPayment = () => {
+  const validateFields = () => {
     let fields = [];
     for(let f in paymentDetails) {
         fields.push({"name": f, value: paymentDetails[f] });
     }
 
+    setIsLoading(true);
     let paymentDetailsFields = {"fields": fields};
     InaiCheckoutModule.validateFields(Constants.token, orderId, Constants.country, 
                       paymentOption.rail_code, paymentDetailsFields).then((response) => {
+                        setIsLoading(false);
             Alert.alert(
               "Result",
               JSON.stringify(response),
               [
-                {text: 'OK', onPress: () => { 
-                  navigation.navigate("Home");
-                }},
+                {text: 'OK', onPress: () => {}},
               ]
             );
       }).catch((err) => {
+        setIsLoading(false);
         Alert.alert(
           "Result",
           JSON.stringify(err),
           [
-            {text: 'OK', onPress: () => { 
-              navigation.navigate("Home");
-            }},
+            {text: 'OK', onPress: () => {}},
           ]
         );
       });
@@ -117,7 +119,7 @@
         />
           <View
              style={{
-               backgroundColor: Colors.button_bg, 
+               backgroundColor: Colors.button_container_bg, 
                marginLeft: 15, 
                borderRadius: 5,
                marginRight: 15, 
@@ -126,13 +128,23 @@
            >
              <Button
                onPress= { () => {
-                    submitPayment();
+                  validateFields();
                  }
                }
                color={Colors.button_bg}
                title= "Validate"
              />
            </View>
+           {isLoading &&
+          <View style={{  
+                        position: "absolute", 
+                        backgroundColor: "#F5FCFF88",
+                        top: 0, right: 0, bottom: 0, left: 0, 
+                        alignItems: 'center',
+                        justifyContent: 'center'}}>
+            <ActivityIndicator size='large' />
+          </View>
+          }
        </SafeAreaView>
    );
  };

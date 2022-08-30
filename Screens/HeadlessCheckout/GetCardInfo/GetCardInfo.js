@@ -6,20 +6,20 @@
  * @flow strict-local
  */
 
- import React from "react";
- import { useEffect, useState } from 'react';
+ import React, { useCallback, useEffect, useState } from "react";
  
  import Constants from "../../../Constants";
  import AsyncStorage from '@react-native-async-storage/async-storage';
  import Base64 from "./Base64";
 
  import {
-   SafeAreaView, Alert, Button, View, Image, TextInput, ActivityIndicator, NativeModules
+   SafeAreaView, Alert, Button, View, Text, Image, TextInput, ActivityIndicator, NativeModules
  } from 'react-native';
  
- const Colors = {
-    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
- };
+const Colors = {
+    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+    "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
+};
  
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
@@ -92,9 +92,10 @@ const preapreOrder =
     const { InaiCheckoutModule } = NativeModules;
 
     let [cardNumber, setCardNumber] = useState("");
-    let [isLoading, setIsLoading] = useState(true);
-    let [orderId, setOrderId] = useState(null);
-    let [pendingCardNumber, setPendingCardNumber] = useState(null);
+    let [showActivityIndicator, setShowActivityIndicator] = useState(true);
+
+    const [orderId, setOrderId] = useState(null);
+
     let [showCardImage, setShowCardImage] = useState(false);
     
     const assetPath = "../../../Assets/";
@@ -114,6 +115,7 @@ const preapreOrder =
           let generatedOrderId = await preapreOrder();
           if (generatedOrderId!= null) {
                 setOrderId(generatedOrderId);
+                setShowActivityIndicator(false); 
           } else {
             Alert.alert(
               "Error",
@@ -125,12 +127,10 @@ const preapreOrder =
               ]
             );
           }
-          setIsLoading(false);
         }
-  
         initData();
-    }, [])
-
+    }, []);
+    
     const processCardInfoResult = (result) => {
         let status = result.status;
         let cardImage = "unknown_card.png";
@@ -144,25 +144,40 @@ const preapreOrder =
         setCardImagePath(CardImages[cardImage]);
     }
 
-    const fieldChanged = (val) => {
-        setCardNumber(val);
-        if (val.length > 5) {
-            getCardInfo(val);
+    const debounce = (func) => {
+        let timeout = null;
+        return function(...args) {
+            const context = this;
+            if(timeout) { 
+                clearTimeout(timeout);
+            }
+            timeout = setTimeout( () => {
+                timeout = null;
+                func.apply(context, args);
+            }, 400);
         }
     };
 
-    const getCardInfo = (getInfoForCardNumber, showResultAlert=false) => {
-
-        if (isLoading) {
-            //  Cache this as the next request
-            setPendingCardNumber(getInfoForCardNumber);
-            return;
+    const fieldChanged = (val, orderId) => {
+        setCardNumber(val);
+        if (val.length > 5) {
+            getCardInfo(val, orderId);
+        } else {
+            setShowCardImage(false);
         }
+    };
 
-        setIsLoading(true);
+    const debounceFieldChange = useCallback(debounce(fieldChanged), []);
+
+    const getCardInfo = (getInfoForCardNumber, orderId, showResultAlert=false) => {
+
+        if (showResultAlert) {
+            setShowActivityIndicator(true);
+        }
+        
         InaiCheckoutModule.getCardInfo(Constants.token, orderId, 
             Constants.country, getInfoForCardNumber).then((response) => {
-                setIsLoading(false);
+                setShowActivityIndicator(false);
                 if (showResultAlert){
                     Alert.alert(
                         "Result",
@@ -172,15 +187,9 @@ const preapreOrder =
                 } else {
                     //  Process current result
                     processCardInfoResult(response);
-                    
-                    //  Process any cached requests now..
-                    if (pendingCardNumber) {
-                        getCardInfo(pendingCardNumber);
-                        setPendingCardNumber(null);
-                    }
                 }
             }).catch((err) => {
-            setIsLoading(false);
+            setShowActivityIndicator(false);
             Alert.alert(
                 "Error",
                 JSON.stringify(err),
@@ -203,20 +212,19 @@ const preapreOrder =
                         placeholder="Card Number"
                         autoCapitalize="none"
                         autoCorrect={false}
-                        onChangeText ={text => fieldChanged(text)}/>
-
+                        onChangeText ={text => debounceFieldChange(text, orderId)}/>
                 {showCardImage && 
                  <Image source={cardImagePath} 
                     style={{ position:"absolute", right: 20, top: 26, width: 60, height: 30, resizeMode: 'contain' }} />
                 }
-                <View style={{backgroundColor: Colors.button_bg, marginTop: 20}}>
+                <View style={{backgroundColor: Colors.button_container_bg, marginTop: 20}}>
                     <Button 
                         color={Colors.button_bg}
                         style={{backgroundColor: Colors.button_bg}}
-                        title='Get Card Info' onPress={() => getCardInfo(cardNumber, true)} />
+                        title='Get Card Info' onPress={() => getCardInfo(cardNumber, orderId, true)} />
                </View>
             </View>
-            {isLoading &&
+            {showActivityIndicator &&
             <View style={{  
                         position: "absolute", 
                         backgroundColor: "#F5FCFF88",

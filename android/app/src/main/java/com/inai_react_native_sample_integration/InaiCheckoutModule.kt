@@ -103,6 +103,32 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         }
     }
 
+    @ReactMethod
+    fun presentCheckout(
+        inaiToken: String,
+        orderId: String,
+        countryCode: String,
+        promise: Promise
+    ){
+        this.paymentCallback = promise
+        val config = InaiConfig(
+            token = inaiToken,
+            orderId = orderId,
+            countryCode = countryCode,
+        )
+        try {
+            val checkout = InaiCheckout(config)
+            currentActivity.let {
+                if (it != null) {
+                    checkout.presentCheckout(it, this)
+                }
+            }
+        } catch (e: Exception) {
+            promise.reject("Init failed. " + e.message)
+        }
+
+    }
+
     override fun cardInfoFetched(result: InaiCardInfoResult) {
         val resultData = JSONObject()
         var status = "failed"
