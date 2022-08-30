@@ -18,7 +18,7 @@
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd"
  };
  
  const SavePaymentMethod_Fields = ({navigation, route}) => {
@@ -26,7 +26,13 @@
   const {paymentOption, orderId} = route.params;
   const paymentFields = paymentOption.form_fields.filter((f) => f.name !== "save_card");
 
-  let [paymentDetails, setPaymentDetails] = useState({});
+  let initialPaymentDetails = {};
+  for(let pf in paymentFields) {
+    let paymentField = paymentFields[pf];
+    initialPaymentDetails[paymentField.name] =  paymentField.field_type == "checkbox" ? true : "";
+  }
+  
+  let [paymentDetails, setPaymentDetails] = useState(initialPaymentDetails);
 
   const submitPayment = () => {
     let fields = [];
@@ -60,27 +66,32 @@
       });
   }
 
-const fieldChanged = (formField, val) => {
-  paymentDetails[formField.name] = val;
-  setPaymentDetails(paymentDetails)
-};
+  const fieldChanged = (formField, val) => {
+    let newPaymentDetails  = {...paymentDetails};
+    newPaymentDetails[formField.name] = val;
+    setPaymentDetails(newPaymentDetails);
+  };
 
  const InputField = (formField)=> {
   if (formField.field_type == "checkbox") {
     return <CheckBox 
+    value={paymentDetails[formField.name]}
     onValueChange={val => fieldChanged(formField, val)}
     style={{marginTop: 10, marginBottom: 10}} />;
   }
-
   return  <TextInput 
     style={{
       padding: 10,
       fontSize: 18,
-      borderBottomWidth: 0.2,
+      borderWidth: 1, 
+      marginTop: 10,
+      borderColor: "#ccc",
+      borderRadius: 5,
       height: 44}}
       placeholder={formField.placeholder}
       autoCapitalize="none"
-      autoCorrect="false"
+      autoCorrect={false}
+      value={paymentDetails[formField.name]}
       onChangeText ={text => fieldChanged(formField, text)}
     ></TextInput>;
   };
@@ -96,9 +107,7 @@ const fieldChanged = (formField, val) => {
           <View style={{width: "100%",
                   paddingLeft: 10,
                   paddingRight: 10,
-                  paddingTop: 20,
-                  borderBottomWidth: 1,
-                  borderBottomColor: "#cfcfcf"}}>
+                  paddingTop: 20}}>
           <Text style={{fontSize: 18}}>{item.label}</Text>
           {
             InputField(item)
@@ -120,7 +129,7 @@ const fieldChanged = (formField, val) => {
                     submitPayment();
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= "Save"
              />
            </View>
