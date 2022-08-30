@@ -16,14 +16,18 @@
     "button_bg" : "#7673dd"
  };
 
- const MakePayment = ({navigation, route}) => {
+ const Product = ({navigation, route}) => {
 
   const {mode} = route.params;
 
   const showPaymentOptions = () => {
-    navigation.navigate("MakePayment");
+    if (mode == "payWithSavedMethod") {
+      navigation.navigate("MakePaymentWithSavedMethod");
+    } else {
+      navigation.navigate("MakePayment");
+    }
   };
-  
+
    return (
      <>
        <SafeAreaView style={{backgroundColor: "#fff"}}>
@@ -67,5 +71,5 @@ This product is made with Primegreen, a series of high-performance recycled mate
    );
  };
  
- export default MakePayment;
+ export default Product;
  
