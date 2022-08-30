@@ -29,6 +29,12 @@
  import ValidateFields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields";
  import ValidateFields_Fields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields_Fields";
 
+ // Get Card Info
+ import GetCardInfo from "./Screens/HeadlessCheckout/GetCardInfo/GetCardInfo";
+
+ //Drop In Checkput
+ import DropInCheckout from "./Screens/DropIn/DropInCheckout";
+
  const Stack = createNativeStackNavigator();
 
  const App = () => {
@@ -52,6 +58,10 @@
             <Stack.Screen name="ValidateFields" component={ValidateFields} options={{ title: "Payment Methods" }} />
             <Stack.Screen name="ValidateFields_Fields" component={ValidateFields_Fields} options={{ title: "Validate Fields" }} />
 
+            <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
+
+            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
+            
         </Stack.Navigator>
      </NavigationContainer>
    );

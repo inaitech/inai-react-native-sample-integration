@@ -16,12 +16,14 @@
    "MakePayment": "Make Payment",
    "SavePaymentMethod": "Save A Payment Method",
    "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
-   "ValidateFields": "Validate Fields"
+   "ValidateFields": "Validate Fields",
+   "GetCardInfo": "Get Card Info"
  };
 
  const Colors = {
-  "button_bg" : "#7673dd"
-};
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
+ };
  
  const HeadlessChekout = ({navigation}) => {
   const openFlow = (flowKey) => {
@@ -48,7 +50,7 @@
         <View
           key={flowKey}
           style={{
-            backgroundColor: Colors.button_bg, 
+            backgroundColor: Colors.button_container_bg, 
             marginLeft: 15, 
             borderRadius: 5,
             marginRight: 15, 
@@ -60,7 +62,7 @@
                 openFlow(flowKey);
               }
             }
-            color="white"
+            color={Colors.button_bg}
             title= {flow}
           />
         </View>

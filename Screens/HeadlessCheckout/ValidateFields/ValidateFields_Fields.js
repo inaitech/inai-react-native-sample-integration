@@ -8,65 +8,75 @@
 
  import React from "react";
 
- import {useEffect, useState} from "react";
+ import {useState} from "react";
 
  import CheckBox from  "@react-native-community/checkbox";
  import Constants from "./../../../Constants";
 
  import {
-   SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
+   SafeAreaView, FlatList, TextInput, NativeModules,ActivityIndicator, Text, View, Alert, Button
  } from 'react-native';
  
  const Colors = {
-  "button_bg" : "#7673dd"
+  "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+  "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
  };
  
  const ValidateFields_Fields = ({navigation, route}) => {
   const { InaiCheckoutModule } = NativeModules;
-  const {paymentOption, orderId} = route.params;
-  const paymentFields = paymentOption.form_fields.filter((f) => f.name !== "save_card");
+  let {paymentOption, orderId} = route.params;
+  let [isLoading, setIsLoading] = useState(false);
 
-  let [paymentDetails, setPaymentDetails] = useState({});
+  let paymentFields = paymentOption.form_fields.filter((f) => f.name !== "save_card");
 
-  const submitPayment = () => {
+  let initialPaymentDetails = {};
+  for(let pf in paymentFields) {
+    let paymentField = paymentFields[pf];
+    initialPaymentDetails[paymentField.name] =  paymentField.field_type == "checkbox" ? true : "";
+  }
+  
+  let [paymentDetails, setPaymentDetails] = useState(initialPaymentDetails);
+
+  const validateFields = () => {
     let fields = [];
     for(let f in paymentDetails) {
         fields.push({"name": f, value: paymentDetails[f] });
     }
 
+    setIsLoading(true);
     let paymentDetailsFields = {"fields": fields};
     InaiCheckoutModule.validateFields(Constants.token, orderId, Constants.country, 
                       paymentOption.rail_code, paymentDetailsFields).then((response) => {
+                        setIsLoading(false);
             Alert.alert(
               "Result",
               JSON.stringify(response),
               [
-                {text: 'OK', onPress: () => { 
-                  navigation.navigate("Home");
-                }},
+                {text: 'OK', onPress: () => {}},
               ]
             );
       }).catch((err) => {
+        setIsLoading(false);
         Alert.alert(
           "Result",
           JSON.stringify(err),
           [
-            {text: 'OK', onPress: () => { 
-              navigation.navigate("Home");
-            }},
+            {text: 'OK', onPress: () => {}},
           ]
         );
       });
   }
 
-const fieldChanged = (formField, val) => {
-  paymentDetails[formField.name] = val;
-  setPaymentDetails(paymentDetails)
-};
+  const fieldChanged = (formField, val) => {
+    let newPaymentDetails  = {...paymentDetails};
+    newPaymentDetails[formField.name] = val;
+    setPaymentDetails(newPaymentDetails);
+  };
 
  const InputField = (formField)=> {
   if (formField.field_type == "checkbox") {
     return <CheckBox 
+    value={paymentDetails[formField.name]}
     onValueChange={val => fieldChanged(formField, val)}
     style={{marginTop: 10, marginBottom: 10}} />;
   }
@@ -75,11 +85,15 @@ const fieldChanged = (formField, val) => {
     style={{
       padding: 10,
       fontSize: 18,
-      borderBottomWidth: 0.2,
+      borderWidth: 1, 
+      marginTop: 10,
+      borderColor: "#ccc",
+      borderRadius: 5,
       height: 44}}
       placeholder={formField.placeholder}
       autoCapitalize="none"
-      autoCorrect="false"
+      autoCorrect={false}
+      value={paymentDetails[formField.name]}
       onChangeText ={text => fieldChanged(formField, text)}
     ></TextInput>;
   };
@@ -95,9 +109,7 @@ const fieldChanged = (formField, val) => {
           <View style={{width: "100%",
                   paddingLeft: 10,
                   paddingRight: 10,
-                  paddingTop: 20,
-                  borderBottomWidth: 1,
-                  borderBottomColor: "#cfcfcf"}}>
+                  paddingTop: 20}}>
           <Text style={{fontSize: 18}}>{item.label}</Text>
           {
             InputField(item)
@@ -107,7 +119,7 @@ const fieldChanged = (formField, val) => {
         />
           <View
              style={{
-               backgroundColor: Colors.button_bg, 
+               backgroundColor: Colors.button_container_bg, 
                marginLeft: 15, 
                borderRadius: 5,
                marginRight: 15, 
@@ -116,13 +128,23 @@ const fieldChanged = (formField, val) => {
            >
              <Button
                onPress= { () => {
-                    submitPayment();
+                  validateFields();
                  }
                }
-               color="white"
+               color={Colors.button_bg}
                title= "Validate"
              />
            </View>
+           {isLoading &&
+          <View style={{  
+                        position: "absolute", 
+                        backgroundColor: "#F5FCFF88",
+                        top: 0, right: 0, bottom: 0, left: 0, 
+                        alignItems: 'center',
+                        justifyContent: 'center'}}>
+            <ActivityIndicator size='large' />
+          </View>
+          }
        </SafeAreaView>
    );
  };
