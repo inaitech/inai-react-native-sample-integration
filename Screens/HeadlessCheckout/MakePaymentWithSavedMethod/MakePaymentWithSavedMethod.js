@@ -181,12 +181,6 @@
     }
   }
 
-  constsanitizeRailCode =(railCode) => {
-    let cleanStr = railCode.replace(/_/g, "");
-    let capitalizedStr = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1);
-    return capitalizedStr;
-  };
-
   const sanitizePaymentMethod = (paymentMethod) => {
     let paymentMethodType = paymentMethod.type;
     let retVal = paymentMethodType;
