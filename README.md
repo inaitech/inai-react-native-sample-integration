@@ -43,8 +43,8 @@ File: [DropInCheckout.js](https://github.com/inaitech/inai-react-native-sample-i
 
 ### Minimum Requirements
 
-React: 18.0.0
-React-Native: 0.69.4
+React: 16.13.1
+React-Native: 0.63.4
 
 ## Setup
   
