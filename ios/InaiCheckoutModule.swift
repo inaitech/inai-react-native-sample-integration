@@ -24,6 +24,34 @@ class InaiCheckoutModule: NSObject {
         return false
     }
     
+    @objc(presentCheckout:orderId:countryCode:withResolver:withRejecter:)
+    func presentCheckout(token: String, orderId: String, countryCode: String, 
+                    resolve:@escaping RCTPromiseResolveBlock,reject:@escaping RCTPromiseRejectBlock) -> Void {
+        self.resolver = resolve;
+        let styles = InaiConfig_Styles(
+            container: InaiConfig_Styles_Container(backgroundColor: "#fff"),
+            cta: InaiConfig_Styles_Cta(backgroundColor: "#123456"),
+            errorText: InaiConfig_Styles_ErrorText(color: "#000000")
+        )
+
+        let config = InaiConfig(token: token,
+                                orderId : orderId,
+                                styles: styles,
+                                countryCode: countryCode
+        )
+
+        DispatchQueue.main.async {
+            if let inaiCheckout = InaiCheckout(config: config),
+                let viewController = RCTPresentedViewController()  {
+                self.vc = viewController
+                inaiCheckout.presentCheckout(viewController: viewController, delegate: self)
+            } else {
+                let error = NSError(domain: "error", code: 0, userInfo: ["message": "Invalid Config"])
+                reject("error", "Invalid Config", error);
+            }
+        }
+    }
+
     @objc(makePayment:orderId:countryCode:railCode:paymentDetails:withResolver:withRejecter:)
     func makePayment(token: String, orderId: String, countryCode: String, 
                      railCode: String, paymentDetails: [String: Any], 

@@ -10,6 +10,12 @@
 
 @interface RCT_EXTERN_MODULE(InaiCheckoutModule, NSObject)
 
+RCT_EXTERN_METHOD(presentCheckout:(NSString *)token 
+                  orderId:(NSString *)orderId
+                  countryCode:(NSString *)countryCode
+                  withResolver:(RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(makePayment:(NSString *)token orderId:(NSString *)orderId
                   countryCode:(NSString *)countryCode railCode:(NSString *)railCode
                   paymentDetails:(NSDictionary *)paymentDetails
