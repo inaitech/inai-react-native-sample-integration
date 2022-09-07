@@ -75,7 +75,6 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
     @ReactMethod
     fun getCardInfo(
         config:ReadableMap,
-        countryCode: String,
         cardNumber: String,
         promise: Promise
     ) {
