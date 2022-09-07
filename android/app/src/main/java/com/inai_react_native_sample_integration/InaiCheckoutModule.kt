@@ -3,7 +3,9 @@ package com.inai_react_native_sample_integration
 import android.util.Log
 import com.facebook.react.bridge.*
 import io.inai.android_sdk.*
+import kotlinx.serialization.decodeFromString
 import org.json.JSONObject
+import kotlinx.serialization.json.Json
 
 class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext),
     InaiCheckoutDelegate, InaiValidateFieldsDelegate, InaiCardInfoDelegate {
@@ -16,9 +18,7 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     @ReactMethod
     fun makePayment(
-        inaiToken: String,
-        orderId: String,
-        countryCode: String,
+        config:ReadableMap,
         paymentMethodOption: String,
         paymentDetailsObject: ReadableMap,
         promise: Promise
@@ -30,14 +30,9 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
             errorText = InaiConfigStylesErrorText(color = "#000000")
         )
 
-        val config = InaiConfig(
-            token = inaiToken,
-            orderId = orderId,
-            styles = styles,
-            countryCode = countryCode,
-        )
         try {
-            val checkout = InaiCheckout(config)
+            val inaiConfig = getInaiConfigObjectFromMap(config)
+            val checkout = InaiCheckout(inaiConfig)
             val paymentDetailsJSON = JSONObject(paymentDetailsObject.toString())
             currentActivity.let {
                 if (it != null) {
@@ -49,23 +44,23 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         }
     }
 
+    private fun getInaiConfigObjectFromMap(map: ReadableMap): InaiConfig {
+        val jsonString = JSONObject(map.toHashMap()).toString()
+        Log.d("********* jsonString: ", jsonString)
+        return Json.decodeFromString(jsonString)
+    }
+
     @ReactMethod
     fun validateFields(
-        inaiToken: String,
-        orderId: String,
-        countryCode: String,
+        config:ReadableMap,
         paymentMethodOption: String,
         paymentDetailsObject: ReadableMap,
         promise: Promise
     ) {
         this.paymentCallback = promise
-        val config = InaiConfig(
-            token = inaiToken,
-            orderId = orderId,
-            countryCode = countryCode,
-        )
         try {
-            val checkout = InaiCheckout(config)
+            val inaiConfig = getInaiConfigObjectFromMap(config)
+            val checkout = InaiCheckout(inaiConfig)
             val paymentDetailsJSON = JSONObject(paymentDetailsObject.toString())
             currentActivity.let {
                 if (it != null) {
@@ -79,20 +74,15 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     @ReactMethod
     fun getCardInfo(
-        inaiToken: String,
-        orderId: String,
+        config:ReadableMap,
         countryCode: String,
         cardNumber: String,
         promise: Promise
     ) {
         this.paymentCallback = promise
-        val config = InaiConfig(
-            token = inaiToken,
-            orderId = orderId,
-            countryCode = countryCode,
-        )
         try {
-            val checkout = InaiCheckout(config)
+            val inaiConfig = getInaiConfigObjectFromMap(config)
+            val checkout = InaiCheckout(inaiConfig)
             currentActivity.let {
                 if (it != null) {
                     checkout.getCardInfo(cardNumber, it, this)
@@ -105,19 +95,13 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     @ReactMethod
     fun presentCheckout(
-        inaiToken: String,
-        orderId: String,
-        countryCode: String,
+        config:ReadableMap,
         promise: Promise
     ){
         this.paymentCallback = promise
-        val config = InaiConfig(
-            token = inaiToken,
-            orderId = orderId,
-            countryCode = countryCode,
-        )
         try {
-            val checkout = InaiCheckout(config)
+            val inaiConfig = getInaiConfigObjectFromMap(config)
+            val checkout = InaiCheckout(inaiConfig)
             currentActivity.let {
                 if (it != null) {
                     checkout.presentCheckout(it, this)
@@ -126,7 +110,6 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         } catch (e: Exception) {
             promise.reject("Init failed. " + e.message)
         }
-
     }
 
     override fun cardInfoFetched(result: InaiCardInfoResult) {
