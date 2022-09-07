@@ -169,14 +169,20 @@ const preapreOrder =
 
     const debounceFieldChange = useCallback(debounce(fieldChanged), []);
 
-    const getCardInfo = (getInfoForCardNumber, orderId, showResultAlert=false) => {
+    const getCardInfo = (currentCardNumber, orderId, showResultAlert=false) => {
 
         if (showResultAlert) {
             setShowActivityIndicator(true);
         }
+
+        let inaiConfig = {
+            token: Constants.token,
+            orderId: orderId,
+            countryCode: Constants.country,
+        };
         
-        InaiCheckoutModule.getCardInfo(Constants.token, orderId, 
-            Constants.country, getInfoForCardNumber).then((response) => {
+        InaiCheckoutModule.getCardInfo(
+            inaiConfig, currentCardNumber).then((response) => {
                 setShowActivityIndicator(false);
                 if (showResultAlert){
                     Alert.alert(

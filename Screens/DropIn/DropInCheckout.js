@@ -77,7 +77,21 @@ const preapreOrder =
  }
 
  const presentCheckout = (orderId, navigation) => {
-    InaiCheckoutModule.presentCheckout(Constants.token, orderId, Constants.country).then((response) => {
+
+  let styles = {
+    container: {backgroundColor: "#fff"},
+    cta: {backgroundColor: "#123456"},
+    errorText: {color: "#000000"}
+  };
+
+  let inaiConfig = {
+    token: Constants.token, 
+    orderId: orderId, 
+    countryCode: Constants.country,
+    styles: styles
+  };
+
+    InaiCheckoutModule.presentCheckout(inaiConfig).then((response) => {
         Alert.alert(
             "Result",
             JSON.stringify(response),

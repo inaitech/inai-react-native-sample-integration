@@ -45,9 +45,16 @@
 
     setIsLoading(true);
     let paymentDetailsFields = {"fields": fields};
-    InaiCheckoutModule.validateFields(Constants.token, orderId, Constants.country, 
-                      paymentOption.rail_code, paymentDetailsFields).then((response) => {
-                        setIsLoading(false);
+    let inaiConfig = {
+      token: Constants.token,
+      orderId: orderId,
+      countryCode: Constants.country,
+    };
+    InaiCheckoutModule.validateFields(
+      inaiConfig,
+      paymentOption.rail_code, 
+      paymentDetailsFields).then((response) => {
+        setIsLoading(false);
             Alert.alert(
               "Result",
               JSON.stringify(response),
