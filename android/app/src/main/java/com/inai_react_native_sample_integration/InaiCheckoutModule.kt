@@ -1,6 +1,5 @@
 package com.inai_react_native_sample_integration
 
-import android.util.Log
 import com.facebook.react.bridge.*
 import io.inai.android_sdk.*
 import kotlinx.serialization.decodeFromString
@@ -46,7 +45,6 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     private fun getInaiConfigObjectFromMap(map: ReadableMap): InaiConfig {
         val jsonString = JSONObject(map.toHashMap()).toString()
-        Log.d("********* jsonString: ", jsonString)
         return Json.decodeFromString(jsonString)
     }
 
