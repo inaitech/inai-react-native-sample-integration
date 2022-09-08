@@ -23,12 +23,6 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         promise: Promise
     ) {
         this.paymentCallback = promise
-        val styles = InaiConfigStyles(
-            container = InaiConfigStylesContainer(backgroundColor = "#efefef"),
-            cta = InaiConfigStylesCta(backgroundColor = "#53509a"),
-            errorText = InaiConfigStylesErrorText(color = "#000000")
-        )
-
         try {
             val inaiConfig = getInaiConfigObjectFromMap(config)
             val checkout = InaiCheckout(inaiConfig)
