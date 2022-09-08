@@ -26,7 +26,7 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         try {
             val inaiConfig = getInaiConfigObjectFromMap(config)
             val checkout = InaiCheckout(inaiConfig)
-            val paymentDetailsJSON = JSONObject(paymentDetailsObject.toString())
+            val paymentDetailsJSON = JSONObject(paymentDetailsObject.toHashMap())
             currentActivity.let {
                 if (it != null) {
                     checkout.makePayment(paymentMethodOption, paymentDetailsJSON, it, this)
@@ -53,7 +53,7 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         try {
             val inaiConfig = getInaiConfigObjectFromMap(config)
             val checkout = InaiCheckout(inaiConfig)
-            val paymentDetailsJSON = JSONObject(paymentDetailsObject.toString())
+            val paymentDetailsJSON = JSONObject(paymentDetailsObject.toHashMap())
             currentActivity.let {
                 if (it != null) {
                     checkout.validateFields(paymentMethodOption, paymentDetailsJSON, it, this)

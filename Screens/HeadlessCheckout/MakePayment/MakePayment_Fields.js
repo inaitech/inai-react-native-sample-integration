@@ -67,7 +67,7 @@ const MakePayment_Fields = ({ navigation, route }) => {
     for (let f in paymentDetails) {
       fields.push({ "name": f, value: paymentDetails[f] });
     }
-    console.log(fields);
+    
     let paymentDetailsFields = { "fields": fields };
     let styles = {
       container: { backgroundColor: "#fff" },
