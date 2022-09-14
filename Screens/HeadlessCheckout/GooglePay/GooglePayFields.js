@@ -27,7 +27,6 @@ const GooglePayFields = ({ navigation, route }) => {
         ).then((response) => {
             if (response) setShouldShowGpayButton(!shouldShowGpayButton);
         }).catch((err) => {
-            console.log(err);
             Alert.alert(
                 "Result",
                 JSON.stringify(err)
@@ -70,7 +69,6 @@ const GooglePayFields = ({ navigation, route }) => {
         ).then(
             (response) => {
                 //  Make payment with google pay data was success.
-                console.log(response)
                 Alert.alert(
                     "Result",
                     JSON.stringify(response),
