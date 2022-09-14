@@ -17,7 +17,8 @@
    "SavePaymentMethod": "Save A Payment Method",
    "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
    "ValidateFields": "Validate Fields",
-   "GetCardInfo": "Get Card Info"
+   "GetCardInfo": "Get Card Info",
+   "GooglePayPaymentOptions":"Google Pay"
  };
 
  const Colors = {
