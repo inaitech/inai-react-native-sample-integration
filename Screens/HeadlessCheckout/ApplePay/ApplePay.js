@@ -14,10 +14,9 @@
  import AsyncStorage from '@react-native-async-storage/async-storage';
 
  import {
-   SafeAreaView, FlatList, Text, View, ActivityIndicator, Alert, TouchableOpacity
+   SafeAreaView, NativeModules, View, ActivityIndicator, Alert, Button, SliderBase
  } from 'react-native';
  
-
  const customerIdStoreKey = `customerId-${Constants.token}`;
  const storeCustomerId = async (customerId) => {
   if (customerId) {
@@ -101,11 +100,20 @@
   return payment_method_options;
 }
 
- const ValidateFields = ({navigation}) => {
-  let [paymentOptions, setPaymentOptions] = useState([]);
-  let [orderId, setOrderId] = useState(null);
-  let [isLoading, setIsLoading] = useState(true);
+  const Colors = {
+    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+    "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
+  };
+
+ const ApplePay = ({navigation}) => {
+  const [orderId, setOrderId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   
+  const [applePayRequestData, setApplePayRequestData] = useState(null);
+  const [buttonTitle, setButtonTitle] = useState("Loading..");
+  
+  const { InaiCheckoutModule } = NativeModules;
+
   useEffect(() => {
       async function initData() {
         //  Load order id
@@ -116,9 +124,20 @@
           
           if (payment_method_options.length > 0) {
             setOrderId(generatedOrderId);
-            payment_method_options = payment_method_options.filter(
-              (pmo) => pmo.rail_code.toLowerCase() !== "apple_pay" && pmo.rail_code.toLowerCase() !== "google_pay");
-            setPaymentOptions(payment_method_options);
+            let applePayMethod = payment_method_options.find((pm) => pm.rail_code.toLowerCase() == "apple_pay");
+            if (applePayMethod != null) {
+              setupApplePayUI(payment_method_options)
+            } else {
+              Alert.alert(
+                "Error",
+                "Apple Pay not available for this account",
+                [
+                  {text: 'OK', onPress: () => { 
+                    navigation.navigate("Home");
+                  }},
+                ]
+              );
+            }
           }
         } else {
           Alert.alert(
@@ -137,34 +156,95 @@
       initData();
   }, [])
 
-  const paymentOptionSelected = (paymentOption) => {
-    navigation.navigate("ValidateFields_Fields", {paymentOption, orderId});
+  
+  const setupApplePayUI = (paymentMethods) => {
+    InaiCheckoutModule.getApplePayRequestData({"payment_method_options": paymentMethods}).then((requestData) => {
+      setApplePayRequestData(requestData);
+    });
   }
 
+  const payWithApplePay = () => {
+    let inaiConfig = {
+      token: Constants.token,
+      orderId: orderId,
+      countryCode: Constants.country
+    };
+
+    InaiCheckoutModule.payWithApplePay(inaiConfig, applePayRequestData).then((response) => {
+      Alert.alert(
+        "Result",
+        JSON.stringify(response),
+        [
+          {
+            text: 'OK', onPress: () => {
+              navigation.navigate("Home");
+            }
+          },
+        ]
+      );
+    }).catch((err) => {
+      Alert.alert(
+        "Result",
+        JSON.stringify(err),
+        [
+          {
+            text: 'OK', onPress: () => {
+              navigation.navigate("Home");
+            }
+          },
+        ]
+      );
+    });
+  };
+
+  const setupApplePay = () => {
+    InaiCheckoutModule.setupApplePay();
+  };
+
   const sanitizeRailCode =(railCode) => {
-    let cleanStr = railCode.replace(/_/g, "");
+    let cleanStr = railCode.replace(/_/g, " ");
     let capitalizedStr = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1);
     return capitalizedStr;
   };
 
    return (
        <SafeAreaView style={{flex: 1, backgroundColor: "#fff" }}>
-        <FlatList
-        style={{paddingTop: 10}}
-          data={paymentOptions}
-          keyExtractor={(item, index) => item.rail_code }
-          renderItem={({item}) => 
-          <TouchableOpacity onPress={()=> paymentOptionSelected(item)} 
-            style={{borderBottomWidth: 1, borderBottomColor: "#cfcfcf"}}>
-          <Text 
+          
+        <View style={{  
+                      position: "absolute", 
+                      backgroundColor: "#F5FCFF88",
+                      top: 0, right: 0, bottom: 0, left: 0, 
+                      alignItems: 'center',
+                      justifyContent: 'center'}}>
+
+        {applePayRequestData != null && 
+          <View
             style={{
-              padding: 10,
-              fontSize: 18,
-              height: 44}}
-            >{sanitizeRailCode(item.rail_code)}</Text>
-          </TouchableOpacity>
-        }
-        />
+              backgroundColor: Colors.button_container_bg,
+              marginLeft: 15,
+              borderRadius: 5,
+              marginRight: 15,
+              marginTop: 10,
+              padding: 5,
+              width: "90%"
+            }}
+          >
+            <Button
+              onPress={() => {
+                  if (applePayRequestData.canMakePayments) {
+                    payWithApplePay();
+                  } else {
+                    setupApplePay();
+                  }
+                }
+              }
+              color={Colors.button_bg}
+              title={ applePayRequestData.canMakePayments ? "Pay With Apple Pay" : "Setup Apple Pay"}
+            />
+          </View>
+          }
+        </View>
+
         {isLoading &&
         <View style={{  
                       position: "absolute", 
@@ -180,5 +260,5 @@
    );
  };
 
- export default ValidateFields;
+ export default ApplePay;
  
