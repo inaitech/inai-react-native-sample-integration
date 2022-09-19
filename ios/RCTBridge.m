@@ -27,4 +27,17 @@ RCT_EXTERN_METHOD(validateFields:(NSDictionary *)config paymentMethodOption:(NSS
 RCT_EXTERN_METHOD(getCardInfo:(NSDictionary *)config cardNumber:(NSString *)cardNumber
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(getApplePayRequestData: (NSDictionary*)paymentMethodOptionsData
+                  withResolver:(RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(payWithApplePay:
+                  (NSDictionary*)config
+                  withApplePaymentRequestData:(NSDictionary*)paymentRequestData
+                  withResolver:(RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(setupApplePay)
+
 @end

@@ -39,6 +39,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = inai_react_native_sample_integration/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inai_react_native_sample_integration/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-inai_react_native_sample_integration-inai_react_native_sample_integrationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2841415E28D0BCEF00412676 /* inai_react_native_sample_integration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = inai_react_native_sample_integration.entitlements; path = inai_react_native_sample_integration/inai_react_native_sample_integration.entitlements; sourceTree = "<group>"; };
 		28D8366F28B0054D00A5C987 /* inai_react_native_sample_integration-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inai_react_native_sample_integration-Bridging-Header.h"; sourceTree = "<group>"; };
 		28D8367028B0054E00A5C987 /* InaiCheckoutModule-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InaiCheckoutModule-Bridging-Header.h"; sourceTree = "<group>"; };
 		28D8367128B0054E00A5C987 /* inai_reactnative_63-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "inai_reactnative_63-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		13B07FAE1A68108700A75B9A /* inai_react_native_sample_integration */ = {
 			isa = PBXGroup;
 			children = (
+				2841415E28D0BCEF00412676 /* inai_react_native_sample_integration.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -503,7 +505,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = inai_react_native_sample_integration/inai_react_native_sample_integration.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56P479WMRQ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = inai_react_native_sample_integration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -515,7 +519,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.ios-sdk-sample";
 				PRODUCT_NAME = inai_react_native_sample_integration;
 				SWIFT_OBJC_BRIDGING_HEADER = "inai_react_native_sample_integration-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -530,7 +534,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = inai_react_native_sample_integration/inai_react_native_sample_integration.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 56P479WMRQ;
 				INFOPLIST_FILE = inai_react_native_sample_integration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -541,7 +547,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.ios-sdk-sample";
 				PRODUCT_NAME = inai_react_native_sample_integration;
 				SWIFT_OBJC_BRIDGING_HEADER = "inai_react_native_sample_integration-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

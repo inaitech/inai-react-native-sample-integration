@@ -12,12 +12,16 @@ import Foundation
 import inai_ios_sdk
 import UIKit
 import React
+import PassKit
 
 @objc(InaiCheckoutModule)
 class InaiCheckoutModule: NSObject {
   
-  var resolver: RCTPromiseResolveBlock!
-  var vc: UIViewController?
+  private var resolver: RCTPromiseResolveBlock!
+  private var vc: UIViewController?
+  
+  private var applePayCompletion: ((PKPaymentAuthorizationResult) -> Void)?
+  private var config: [String: String]?
   
   @objc(requiresMainQueueSetup)
   static func requiresMainQueueSetup() -> Bool {
@@ -115,6 +119,102 @@ class InaiCheckoutModule: NSObject {
         reject("error", "Invalid Config", error);
       }
     }
+  }
+  
+  @objc(getApplePayRequestData:withResolver:withRejecter:)
+  func getApplePayRequestData(paymentMethodOptionsData: [String : Any],
+                              resolve:@escaping RCTPromiseResolveBlock,
+                              reject:@escaping RCTPromiseRejectBlock) -> Void {
+    var applePayRequestDict: [String: Any] = [:]
+
+    if let applePayRequestData = InaiCheckout.getApplePayRequestData(paymentMethodOptionsData: paymentMethodOptionsData) {
+      applePayRequestDict = [
+        "currencyCode" : applePayRequestData.currencyCode,
+        "countryCode" : applePayRequestData.countryCode,
+        "merchantId" : applePayRequestData.merchantId,
+        "productDescription" : applePayRequestData.productDescription,
+        "orderAmount" : applePayRequestData.orderAmount,
+        "canMakePayments" : applePayRequestData.canMakePayments,
+        "canSetupCards" : applePayRequestData.canSetupCards,
+        "supportedNetworks" : applePayRequestData.supportedNetworks
+      ]
+    } else {
+      applePayRequestDict["message"] = "no data"
+    }
+    
+    return resolve(applePayRequestDict)
+  }
+  
+  @objc func setupApplePay() {
+    DispatchQueue.main.async {
+      let passLibrary = PKPassLibrary()
+      passLibrary.openPaymentSetup()
+    }
+  }
+  
+  @objc(payWithApplePay:withApplePaymentRequestData:withResolver:withRejecter:)
+  func payWithApplePay(config: [String:String],
+                       withApplePaymentRequestData paymentRequestData: [String: Any],
+                       resolve:@escaping RCTPromiseResolveBlock,
+                       reject:@escaping RCTPromiseRejectBlock) {
+    DispatchQueue.main.async {
+      if let viewController = RCTPresentedViewController()  {
+        self.config = config
+        self.vc = viewController
+        self.resolver = resolve
+        let orderSummary = PKPaymentSummaryItem(label: paymentRequestData["productDescription"] as! String,
+                                                amount: NSDecimalNumber(string: paymentRequestData["orderAmount"] as? String ?? "0"),
+                                                type: .final)
+        let paymentSummaryItems = [orderSummary]
+        
+        // Create a payment request.
+        let paymentRequest = PKPaymentRequest()
+        paymentRequest.paymentSummaryItems = paymentSummaryItems
+        paymentRequest.merchantIdentifier = paymentRequestData["merchantId"] as! String
+        paymentRequest.merchantCapabilities = .capability3DS
+        
+        paymentRequest.countryCode = paymentRequestData["countryCode"] as! String
+        paymentRequest.currencyCode = paymentRequestData["currencyCode"] as! String
+        
+        paymentRequest.supportedNetworks = [.amex, .visa, .masterCard, .discover]
+        
+        let paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
+        paymentController.delegate = self
+        paymentController.present(completion: { (presented: Bool) in
+          if presented {
+            debugPrint("Presented payment controller")
+          } else {
+            let error = NSError(domain: "error", code: 0, userInfo: ["message": "Apple Pay Not Available"])
+            reject("error", "Apple Pay Not Available", error);
+          }
+        })
+      }
+    }
+  }
+}
+
+extension InaiCheckoutModule: PKPaymentAuthorizationControllerDelegate {
+  func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,
+                                      didAuthorizePayment payment: PKPayment,
+                                      handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+      let config = InaiConfig(token: config!["token"],
+                              orderId : config!["orderId"],
+                              countryCode: config!["countryCode"] )
+      
+      if let inaiCheckout = InaiCheckout(config: config) {
+          
+          let paymentDetails = InaiCheckout.convertPaymentTokenToDict(payment: payment)
+          self.applePayCompletion = completion
+          
+          inaiCheckout.makePayment( paymentMethodOption: "apple_pay",
+                                    paymentDetails: paymentDetails,
+                                    viewController: self.vc!,
+                                    delegate: self)
+      }
+  }
+
+  func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+    controller.dismiss {}
   }
 }
 

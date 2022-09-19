@@ -65,11 +65,9 @@ const MakePayment_Fields = ({ navigation, route }) => {
   const submitPayment = () => {
     let fields = [];
     for (let f in paymentDetails) {
-      if (f != "number") {
-        fields.push({ "name": f, value: paymentDetails[f] });
-      }
+      fields.push({ "name": f, value: paymentDetails[f] });
     }
-    console.log(fields);
+    
     let paymentDetailsFields = { "fields": fields };
     let styles = {
       container: { backgroundColor: "#fff" },

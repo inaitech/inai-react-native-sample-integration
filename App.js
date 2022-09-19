@@ -25,6 +25,9 @@
  import MakePaymentWithSavedMethod from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod";
  import MakePaymentWithSavedMethod_Fields from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod_Fields";
  
+ //  Apple Pay
+ import ApplePay from "./Screens/HeadlessCheckout/ApplePay/ApplePay";
+
  //  Validate Fields
  import ValidateFields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields";
  import ValidateFields_Fields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields_Fields";
@@ -34,6 +37,10 @@
 
  //Drop In Checkput
  import DropInCheckout from "./Screens/DropIn/DropInCheckout";
+
+ // Google Pay
+ import GooglePayPaymentOptions from "./Screens/HeadlessCheckout/GooglePay/GooglePayPaymentOptions";
+ import GooglePayFields from "./Screens/HeadlessCheckout/GooglePay/GooglePayFields"
 
  const Stack = createNativeStackNavigator();
 
@@ -55,12 +62,17 @@
             <Stack.Screen name="MakePaymentWithSavedMethod" component={MakePaymentWithSavedMethod} options={{ title: "Saved Payment Methods" }} />
             <Stack.Screen name="MakePaymentWithSavedMethod_Fields" component={MakePaymentWithSavedMethod_Fields} options={{ title: "Payment" }} />
 
+            <Stack.Screen name="ApplePay" component={ApplePay} options={{ title: "Apple Pay" }} />
+
             <Stack.Screen name="ValidateFields" component={ValidateFields} options={{ title: "Payment Methods" }} />
             <Stack.Screen name="ValidateFields_Fields" component={ValidateFields_Fields} options={{ title: "Validate Fields" }} />
 
             <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
 
             <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
+
+            <Stack.Screen name="GooglePay" component={GooglePayPaymentOptions} options = {{title : "Payment Methods"}} />
+            <Stack.Screen name="GooglePayFields" component={GooglePayFields} options = {{title : "Google Pay"}} />
             
         </Stack.Navigator>
      </NavigationContainer>

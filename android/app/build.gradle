@@ -267,6 +267,9 @@ dependencies {
 
     //inai payments sdk
     implementation 'io.inai.payments:android-sdk:0.1.19'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+    //Google Pay
+    implementation "com.google.android.gms:play-services-wallet:19.1.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
