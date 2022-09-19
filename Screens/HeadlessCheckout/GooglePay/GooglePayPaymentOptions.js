@@ -129,7 +129,7 @@ const GooglePayPaymentOptions = ({navigation}) => {
   
     const paymentOptionSelected = (paymentOption) => {
         console.log(paymentOption)
-      navigation.navigate("GooglePay", {paymentOption, orderId});
+      navigation.navigate("GooglePayFields", {paymentOption, orderId});
     }
   
     const sanitizeRailCode =(railCode) => {

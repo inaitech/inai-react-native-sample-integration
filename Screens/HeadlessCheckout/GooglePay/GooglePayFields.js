@@ -13,7 +13,7 @@ const GooglePayFields = ({ navigation, route }) => {
 
     const { InaiCheckoutModule } = NativeModules;
     const { paymentOption, orderId } = route.params;
-    var googlePayRequestData = {};
+    
     const [shouldShowGpayButton, setShouldShowGpayButton] = useState(false);
 
     const initGooglePay = () => {
@@ -25,7 +25,16 @@ const GooglePayFields = ({ navigation, route }) => {
         InaiCheckoutModule.initGooglePay(
             paymentDetailsFields
         ).then((response) => {
-            if (response) setShouldShowGpayButton(!shouldShowGpayButton);
+            //  Show Gpay button only if the user is allowed to use google pay.
+            if (response == true) {
+                setShouldShowGpayButton(!shouldShowGpayButton);
+            }else{
+                Alert.alert(
+                    "Result",
+                    "Google Pay Not Available!"
+                );
+            }
+            
         }).catch((err) => {
             Alert.alert(
                 "Result",
@@ -35,40 +44,14 @@ const GooglePayFields = ({ navigation, route }) => {
     }
     //  On Google Pay Button Press
     const launchGooglePay = () => {
-        InaiCheckoutModule.launchGooglePay().then(
-            (response) => {
-                //   If google pay is success then handle success.
-                googlePaySuccess(response)
-            }
-        ).catch(
-            (err) => {
-                Alert.alert(
-                    "Result",
-                    JSON.stringify(err)
-                );
-            }
-        );
-    }
-
-    const googlePaySuccess = (paymentDataJson) => {
-        let styles = {
-            container: { backgroundColor: "#fff" },
-            cta: { backgroundColor: "#123456" },
-            errorText: { color: "#000000" }
-        };
         let inaiConfig = {
             token: Constants.token,
             orderId: orderId,
-            countryCode: Constants.country,
-            styles: styles
+            countryCode: Constants.country
         };
-        InaiCheckoutModule.handleGooglePaySuccess(
-            paymentDataJson,
-            "google_pay",
-            inaiConfig
-        ).then(
+        InaiCheckoutModule.launchGooglePay(inaiConfig).then(
             (response) => {
-                //  Make payment with google pay data was success.
+                //   If google pay is success then handle success.
                 Alert.alert(
                     "Result",
                     JSON.stringify(response),

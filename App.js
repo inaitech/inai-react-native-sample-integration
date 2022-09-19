@@ -66,8 +66,8 @@
 
             <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
 
-            <Stack.Screen name="GooglePayPaymentOptions" component={GooglePayPaymentOptions} options = {{title : "Payment Methods"}} />
-            <Stack.Screen name="GooglePay" component={GooglePayFields} options = {{title : "Google Pay"}} />
+            <Stack.Screen name="GooglePay" component={GooglePayPaymentOptions} options = {{title : "Payment Methods"}} />
+            <Stack.Screen name="GooglePayFields" component={GooglePayFields} options = {{title : "Google Pay"}} />
             
         </Stack.Navigator>
      </NavigationContainer>

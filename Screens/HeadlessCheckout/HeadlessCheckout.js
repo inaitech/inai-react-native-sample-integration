@@ -18,7 +18,7 @@
    "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
    "ValidateFields": "Validate Fields",
    "GetCardInfo": "Get Card Info",
-   "GooglePayPaymentOptions":"Google Pay"
+   "GooglePay":"Google Pay"
  };
 
  const Colors = {
@@ -44,6 +44,10 @@
   };
 
   const renderButtons = () => {
+    if (Platform.OS !== 'android') {
+      //  Remove Google Pay option for non android platforms
+      delete Flows["GooglePay"];
+    }
     const views = [];
     for (let flowKey in Flows) {
       let flow = Flows[flowKey];

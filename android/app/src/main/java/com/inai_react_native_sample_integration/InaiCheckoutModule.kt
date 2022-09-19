@@ -20,6 +20,8 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     private var paymentCallback: Promise? = null
     private var googlePayRequestData: InaiGooglePayRequestData? = null
+    private var config: InaiConfig? = null
+    private var GOOGLE_PAY = "google_pay"
 
     init {
         reactContext.addActivityEventListener(this)
@@ -138,7 +140,7 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
                                 this.googlePayRequestData = googlePayRequestData
                                 paymentCallback?.resolve(googlePayRequestData.canMakePayments)
                             } else {
-                                paymentCallback?.resolve(googlePayRequestData)
+                                paymentCallback?.resolve(googlePayRequestData.canMakePayments)
                             }
                         } else {
                             promise.reject("Google Pay Not Available")
@@ -153,8 +155,10 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     @ReactMethod
     fun launchGooglePay(
+        config: ReadableMap,
         promise: Promise
     ) {
+        this.config = getInaiConfigObjectFromMap(config)
         this.paymentCallback = promise
         googlePayRequestData?.let {
             val task = InaiCheckout.launchGooglePayRequest(googlePayRequestData!!)
@@ -162,7 +166,9 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
                 if (completedTask.isSuccessful) {
                     completedTask.result?.let { paymentData ->
                         val paymentDataJsonString = paymentData.toJson()
-                        paymentCallback?.resolve(paymentDataJsonString)
+                        this.config?.let {
+                            handleGooglePaySuccess(paymentDataJsonString, GOOGLE_PAY, it)
+                        }
                     }
                 } else {
                     when (val exception = completedTask.exception) {
@@ -185,29 +191,27 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
         }
     }
 
-    @ReactMethod
-    fun handleGooglePaySuccess(
+    
+    private fun handleGooglePaySuccess(
         paymentDataJSON: String,
         paymentMethodOption: String,
-        config: ReadableMap,
-        promise: Promise
+        config: InaiConfig,
+        
     ) {
         //  Google Auth successful
         //  Init Inai SDK and process checkout
-        paymentCallback = promise
         try {
             //  Process google token for payment details data
             val paymentData = PaymentData.fromJson(paymentDataJSON)
             val paymentDetails = InaiCheckout.getGooglePayRequestData(paymentData)
-            val inaiConfig = getInaiConfigObjectFromMap(config)
-            val checkout = InaiCheckout(inaiConfig)
+            val checkout = InaiCheckout(config)
             currentActivity?.let {
                 checkout.makePayment(paymentMethodOption, paymentDetails, it, this)
             }
 
         } catch (ex: Exception) {
             //  Handle initialization error
-            promise.reject("Error while initializing sdk : ${ex.message}")
+            paymentCallback?.reject("Error while initializing sdk : ${ex.message}")
         }
     }
 
@@ -258,7 +262,10 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
                 intentData?.let { intent ->
                     PaymentData.getFromIntent(intent)?.let { paymentData ->
                         val paymentDataJsonString = paymentData.toJson()
-                        paymentCallback?.resolve(paymentDataJsonString)
+                        config?.let{
+                            handleGooglePaySuccess(paymentDataJsonString, GOOGLE_PAY, it)
+                        }
+                        
                     }
                 }
 
@@ -273,7 +280,7 @@ class InaiCheckoutModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     }
 
-    private fun convertJSONToWritableMap(jsonObject: JSONObject): WritableMap {
+    private fun convertJSONToWritableMap(jsonObject: JSONObject): WritableMap   {
         val wMap = WritableNativeMap()
         val keys = jsonObject.keys()
         while (keys.hasNext()) {
