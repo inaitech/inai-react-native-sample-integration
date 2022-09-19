@@ -16,6 +16,7 @@
    "MakePayment": "Make Payment",
    "SavePaymentMethod": "Save A Payment Method",
    "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
+   "ApplePay": "Apple Pay",
    "ValidateFields": "Validate Fields",
    "GetCardInfo": "Get Card Info"
  };
@@ -34,7 +35,11 @@
       //  Load product view with normal
       navKey = "Product";
       options = {mode: "normal"};
-    } else if (flowKey == "MakePaymentWithSavedMethod") {
+    }  else if (flowKey == "ApplePay") {
+      //  Load product view with pay with Apple Pay Mode
+      navKey = "Product";
+      options = {mode: "applePay"};
+    }  else if (flowKey == "MakePaymentWithSavedMethod") {
       //  Load product view with pay with saved method mode
       navKey = "Product";
       options = {mode: "payWithSavedMethod"};
@@ -43,9 +48,15 @@
   };
 
   const renderButtons = () => {
+    if (Platform.OS !== 'ios') {
+      //  Remove Apple Pay option for non ios platforms
+      delete Flows["ApplePay"];
+    }
+
     const views = [];
     for (let flowKey in Flows) {
       let flow = Flows[flowKey];
+
       views.push(
         <View
           key={flowKey}
