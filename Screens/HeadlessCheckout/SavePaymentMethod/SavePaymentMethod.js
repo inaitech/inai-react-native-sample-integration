@@ -118,7 +118,7 @@
           if (payment_method_options.length > 0) {
             setOrderId(generatedOrderId);
             payment_method_options = payment_method_options.filter(
-              (pmo) => pmo.rail_code.toLowerCase() !== "apple pay" && pmo.rail_code.toLowerCase() !== "google pay");
+              (pmo) => pmo.rail_code.toLowerCase() !== "apple_pay" && pmo.rail_code.toLowerCase() !== "google_pay");
             setPaymentOptions(payment_method_options);
           }
         } else {

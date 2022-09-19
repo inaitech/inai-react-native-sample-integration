@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
- import React from "react";
+import React from "react";
 
  import {useEffect, useState} from "react";
  import Constants from "../../../Constants";
@@ -101,84 +93,82 @@
   return payment_method_options;
 }
 
- const ValidateFields = ({navigation}) => {
-  let [paymentOptions, setPaymentOptions] = useState([]);
-  let [orderId, setOrderId] = useState(null);
-  let [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-      async function initData() {
-        //  Load order id
-        let generatedOrderId = await preapreOrder();
-        if (generatedOrderId!= null) {
-          //  Load the payment options data
-          let payment_method_options = await getPaymentOptions(generatedOrderId);
-          
-          if (payment_method_options.length > 0) {
-            setOrderId(generatedOrderId);
-            payment_method_options = payment_method_options.filter(
-              (pmo) => pmo.rail_code.toLowerCase() !== "apple_pay" && pmo.rail_code.toLowerCase() !== "google_pay");
-            setPaymentOptions(payment_method_options);
+const GooglePayPaymentOptions = ({navigation}) => {
+    const [paymentOptions, setPaymentOptions] = useState([]);
+    const [orderId, setOrderId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(() => {
+        async function initData() {
+          //  Load order id
+          let generatedOrderId = await preapreOrder();
+          if (generatedOrderId!= null) {
+            //  Load the payment options data
+            let payment_method_options = await getPaymentOptions(generatedOrderId);
+            
+            if (payment_method_options.length > 0) {
+              setOrderId(generatedOrderId);
+              setPaymentOptions(payment_method_options);
+            }
+          } else {
+            Alert.alert(
+              "Error",
+              "Error while creating order",
+              [
+                {text: 'OK', onPress: () => { 
+                  navigation.navigate("Home");
+                }},
+              ]
+            );
           }
-        } else {
-          Alert.alert(
-            "Error",
-            "Error while creating order",
-            [
-              {text: 'OK', onPress: () => { 
-                navigation.navigate("Home");
-              }},
-            ]
-          );
+          setIsLoading(false);
         }
-        setIsLoading(false);
-      }
-
-      initData();
-  }, [])
-
-  const paymentOptionSelected = (paymentOption) => {
-    navigation.navigate("ValidateFields_Fields", {paymentOption, orderId});
-  }
-
-  const sanitizeRailCode =(railCode) => {
-    let cleanStr = railCode.replace(/_/g, "");
-    let capitalizedStr = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1);
-    return capitalizedStr;
-  };
-
-   return (
-       <SafeAreaView style={{flex: 1, backgroundColor: "#fff" }}>
-        <FlatList
-        style={{paddingTop: 10}}
-          data={paymentOptions}
-          keyExtractor={(item, index) => item.rail_code }
-          renderItem={({item}) => 
-          <TouchableOpacity onPress={()=> paymentOptionSelected(item)} 
-            style={{borderBottomWidth: 1, borderBottomColor: "#cfcfcf"}}>
-          <Text 
-            style={{
-              padding: 10,
-              fontSize: 18,
-              height: 44}}
-            >{sanitizeRailCode(item.rail_code)}</Text>
-          </TouchableOpacity>
-        }
-        />
-        {isLoading &&
-        <View style={{  
-                      position: "absolute", 
-                      backgroundColor: "#F5FCFF88",
-                      top: 0, right: 0, bottom: 0, left: 0, 
-                      alignItems: 'center',
-                      justifyContent: 'center'}}>
-          <ActivityIndicator size='large' />
-        </View>
-        }
-       </SafeAreaView>
-
-   );
- };
-
- export default ValidateFields;
- 
+  
+        initData();
+    }, [])
+  
+    const paymentOptionSelected = (paymentOption) => {
+        console.log(paymentOption)
+      navigation.navigate("GooglePayFields", {paymentOption, orderId});
+    }
+  
+    const sanitizeRailCode =(railCode) => {
+      let cleanStr = railCode.replace(/_/g, "");
+      let capitalizedStr = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1);
+      return capitalizedStr;
+    };
+  
+     return (
+         <SafeAreaView style={{flex: 1, backgroundColor: "#fff" }}>
+          <FlatList
+          style={{paddingTop: 10}}
+            data={paymentOptions}
+            keyExtractor={(item, index) => item.rail_code }
+            renderItem={({item}) => 
+            <TouchableOpacity onPress={()=> paymentOptionSelected(item)} 
+              style={{borderBottomWidth: 1, borderBottomColor: "#cfcfcf"}}>
+            <Text 
+              style={{
+                padding: 10,
+                fontSize: 18,
+                height: 44}}
+              >{sanitizeRailCode(item.rail_code)}</Text>
+            </TouchableOpacity>
+          }
+          />
+          {isLoading &&
+          <View style={{  
+                        position: "absolute", 
+                        backgroundColor: "#F5FCFF88",
+                        top: 0, right: 0, bottom: 0, left: 0, 
+                        alignItems: 'center',
+                        justifyContent: 'center'}}>
+            <ActivityIndicator size='large' />
+          </View>
+          }
+         </SafeAreaView>
+  
+     );
+   };
+  
+   export default GooglePayPaymentOptions;

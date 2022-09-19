@@ -67,10 +67,25 @@ const MakePayment_Fields = ({ navigation, route }) => {
     for (let f in paymentDetails) {
       fields.push({ "name": f, value: paymentDetails[f] });
     }
-
+    
     let paymentDetailsFields = { "fields": fields };
-    InaiCheckoutModule.makePayment(Constants.token, orderId, Constants.country,
-      paymentOption.rail_code, paymentDetailsFields).then((response) => {
+    let styles = {
+      container: { backgroundColor: "#fff" },
+      cta: { backgroundColor: "#123456" },
+      errorText: { color: "#000000" }
+    };
+
+    let inaiConfig = {
+      token: Constants.token,
+      orderId: orderId,
+      countryCode: Constants.country,
+      styles: styles
+    };
+
+    InaiCheckoutModule.makePayment(
+      inaiConfig,
+      paymentOption.rail_code,
+      paymentDetailsFields).then((response) => {
         Alert.alert(
           "Result",
           JSON.stringify(response),
