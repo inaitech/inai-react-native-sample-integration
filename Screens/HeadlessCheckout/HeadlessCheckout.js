@@ -18,7 +18,8 @@
    "MakePaymentWithSavedMethod": "Pay With saved Payment Method",
    "ApplePay": "Apple Pay",
    "ValidateFields": "Validate Fields",
-   "GetCardInfo": "Get Card Info"
+   "GetCardInfo": "Get Card Info",
+   "GooglePay":"Google Pay"
  };
 
  const Colors = {
@@ -48,6 +49,12 @@
   };
 
   const renderButtons = () => {
+
+    if (Platform.OS !== 'android') {
+      //  Remove Google Pay option for non android platforms
+      delete Flows["GooglePay"];
+    }
+
     if (Platform.OS !== 'ios') {
       //  Remove Apple Pay option for non ios platforms
       delete Flows["ApplePay"];

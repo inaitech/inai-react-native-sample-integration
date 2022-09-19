@@ -38,6 +38,10 @@
  //Drop In Checkput
  import DropInCheckout from "./Screens/DropIn/DropInCheckout";
 
+ // Google Pay
+ import GooglePayPaymentOptions from "./Screens/HeadlessCheckout/GooglePay/GooglePayPaymentOptions";
+ import GooglePayFields from "./Screens/HeadlessCheckout/GooglePay/GooglePayFields"
+
  const Stack = createNativeStackNavigator();
 
  const App = () => {
@@ -66,6 +70,9 @@
             <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
 
             <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
+
+            <Stack.Screen name="GooglePay" component={GooglePayPaymentOptions} options = {{title : "Payment Methods"}} />
+            <Stack.Screen name="GooglePayFields" component={GooglePayFields} options = {{title : "Google Pay"}} />
             
         </Stack.Navigator>
      </NavigationContainer>
