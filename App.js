@@ -6,78 +6,161 @@
  * @flow strict-local
  */
 
- import React from "react";
- import { NavigationContainer } from '@react-navigation/native';
- import { createNativeStackNavigator } from '@react-navigation/native-stack';
- import Home from "./Screens/Home";
- import HeadlessCheckout from  "./Screens/HeadlessCheckout/HeadlessCheckout";
- import Product from "./Screens/Product";
- 
- // Make Paymnent Screens
- import MakePayment from "./Screens/HeadlessCheckout/MakePayment/MakePayment";
- import MakePayment_Fields from "./Screens/HeadlessCheckout/MakePayment/MakePayment_Fields";
- 
- // Save Paymnent Method Screens
- import SavePaymentMethod from "./Screens/HeadlessCheckout/SavePaymentMethod/SavePaymentMethod";
- import SavePaymentMethod_Fields from "./Screens/HeadlessCheckout/SavePaymentMethod/SavePaymentMethod_Fields";
+import React from 'react';
 
- // Make Payment With Saved Method
- import MakePaymentWithSavedMethod from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod";
- import MakePaymentWithSavedMethod_Fields from "./Screens/HeadlessCheckout/MakePaymentWithSavedMethod/MakePaymentWithSavedMethod_Fields";
- 
- //  Apple Pay
- import ApplePay from "./Screens/HeadlessCheckout/ApplePay/ApplePay";
+import InaiCheckout from 'ay-inai-react-native-sdk';
+import InaiCheckout_android from 'ay-inai-react-native-sdk';
 
- //  Validate Fields
- import ValidateFields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields";
- import ValidateFields_Fields from "./Screens/HeadlessCheckout/ValidateFields/ValidateFields_Fields";
+console.log("________________________________");
+console.log("InaiCheckout: ");
+console.log(InaiCheckout);
 
- // Get Card Info
- import GetCardInfo from "./Screens/HeadlessCheckout/GetCardInfo/GetCardInfo";
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  Button,
+  Alert
+} from 'react-native';
 
- //Drop In Checkput
- import DropInCheckout from "./Screens/DropIn/DropInCheckout";
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
- // Google Pay
- import GooglePayPaymentOptions from "./Screens/HeadlessCheckout/GooglePay/GooglePayPaymentOptions";
- import GooglePayFields from "./Screens/HeadlessCheckout/GooglePay/GooglePayFields"
+/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
+ * LTI update could not be added via codemod */
+const Section = ({children, title}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
+};
 
- const Stack = createNativeStackNavigator();
+const App = () => {
+  const isDarkMode = useColorScheme() === 'dark';
 
- const App = () => {
-   return (
-    <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />
-            
-            <Stack.Screen name="HeadlessCheckout" component={HeadlessCheckout} options={{ title: "Headless Checkout"}} />
-            <Stack.Screen name="Product" component={Product} options={{ title: "Product" }} />
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
-            <Stack.Screen name="MakePayment" component={MakePayment} options={{ title: "Payment Methods" }} />
-            <Stack.Screen name="MakePayment_Fields" component={MakePayment_Fields} options={{ title: "Payment" }} />
+  return (
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
 
-            <Stack.Screen name="SavePaymentMethod" component={SavePaymentMethod} options={{ title: "Payment Methods" }} />
-            <Stack.Screen name="SavePaymentMethod_Fields" component={SavePaymentMethod_Fields} options={{ title: "Save Payment Method" }} />
+<Button
+          onPress={() => {
 
-            <Stack.Screen name="MakePaymentWithSavedMethod" component={MakePaymentWithSavedMethod} options={{ title: "Saved Payment Methods" }} />
-            <Stack.Screen name="MakePaymentWithSavedMethod_Fields" component={MakePaymentWithSavedMethod_Fields} options={{ title: "Payment" }} />
+            //  Prod:
+            let inaiConfig = {
+              token: "sbx_ci_7kCbmGnJBYmC4TwUz1FA3FsWPnRKQG3gzCX4R87VDTsS",
+              orderId: "sbx_ord_2FOpiR78k8tb9iuNRDs4n8sTRu8",
+              countryCode: "USA"
+            };
 
-            <Stack.Screen name="ApplePay" component={ApplePay} options={{ title: "Apple Pay" }} />
+            InaiCheckout.presentCheckout(inaiConfig).then((response) => {
+                  Alert.alert(
+                      "Result",
+                      JSON.stringify(response),
+                      [
+                        {
+                          text: 'OK', onPress: () => {
+                            //navigation.navigate("Home");
+                          }
+                        },
+                      ]
+                    );
+              }).catch((err) => {
+                  Alert.alert(
+                      "Result",
+                      JSON.stringify(err),
+                      [
+                        {
+                          text: 'OK', onPress: () => {
+                            //  navigation.navigate("Home");
+                          }
+                        },
+                      ]
+                    );
+              });
+          } }
+          title="Inai Checkout"
+          color="#841584" />
 
-            <Stack.Screen name="ValidateFields" component={ValidateFields} options={{ title: "Payment Methods" }} />
-            <Stack.Screen name="ValidateFields_Fields" component={ValidateFields_Fields} options={{ title: "Validate Fields" }} />
+          <Section title="Step One">
+            Edit <Text style={styles.highlight}>App.js</Text> to change this
+            screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-            <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
 
-            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
-
-            <Stack.Screen name="GooglePay" component={GooglePayPaymentOptions} options = {{title : "Payment Methods"}} />
-            <Stack.Screen name="GooglePayFields" component={GooglePayFields} options = {{title : "Google Pay"}} />
-            
-        </Stack.Navigator>
-     </NavigationContainer>
-   );
- };
- 
- export default App;
- 
+export default App;
