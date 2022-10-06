@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import CheckBox from "@react-native-community/checkbox";
 import Constants from "./../../../Constants";
 import ExpiryDate from "./ExpiryDate";
-
+import  InaiCheckout  from  "ay-inai-react-native-sdk";
 import {
   SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
 } from 'react-native';
@@ -24,7 +24,7 @@ const Colors = {
 };
 
 const MakePaymentWithSavedMethod_Fields = ({ navigation, route }) => {
-  const { InaiCheckoutModule } = NativeModules;
+
   const { paymentOption, orderId } = route.params;
   const paymentFields = paymentOption.form_fields || [];
 
@@ -84,7 +84,7 @@ const MakePaymentWithSavedMethod_Fields = ({ navigation, route }) => {
       styles: styles
     };
 
-    InaiCheckoutModule.makePayment(
+    InaiCheckout.makePayment(
       inaiConfig,
       paymentOption.rail_code, 
       paymentDetailsFields).then((response) => {

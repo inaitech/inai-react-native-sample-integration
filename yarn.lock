@@ -2067,6 +2067,11 @@
   "resolved" "https://registry.npmjs.org/atob/-/atob-2.1.2.tgz"
   "version" "2.1.2"
 
+"ay-inai-react-native-sdk@^0.1.27":
+  "integrity" "sha512-/+5qUgdeS2URoO8qJlghbuD7caax643i8vXyS7m+/LlOC8qZ/zsxltYbO7szOo2qKVNnToVy3mAXtsE4pKjMug=="
+  "resolved" "https://registry.npmjs.org/ay-inai-react-native-sdk/-/ay-inai-react-native-sdk-0.1.27.tgz"
+  "version" "0.1.27"
+
 "babel-core@^7.0.0-bridge.0":
   "integrity" "sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg=="
   "resolved" "https://registry.npmjs.org/babel-core/-/babel-core-7.0.0-bridge.0.tgz"

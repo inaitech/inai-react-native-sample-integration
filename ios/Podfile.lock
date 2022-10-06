@@ -1,4 +1,7 @@
 PODS:
+  - ay-inai-react-native-sdk (0.1.27):
+    - inai-pod (= 0.1.20)
+    - React
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -73,7 +76,7 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
-  - inai-pod (0.1.17)
+  - inai-pod (0.1.20)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.06.28.00-v2):
@@ -370,6 +373,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
+  - ay-inai-react-native-sdk (from `../node_modules/ay-inai-react-native-sdk`)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -396,7 +400,6 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - inai-pod (= 0.1.17)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -452,6 +455,8 @@ SPEC REPOS:
     - YogaKit
 
 EXTERNAL SOURCES:
+  ay-inai-react-native-sdk:
+    :path: "../node_modules/ay-inai-react-native-sdk"
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
@@ -526,6 +531,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  ay-inai-react-native-sdk: 7890f820f4b995694bf77047ab4cbb10f3839f39
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -542,7 +548,7 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
-  inai-pod: 75ed6b4671e8d8d07be11dba87ff8c281541c590
+  inai-pod: 52421696b8e46e397564116ce991360f2e513d6f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a
@@ -579,6 +585,6 @@ SPEC CHECKSUMS:
   Yoga: ff994563b2fd98c982ca58e8cd9db2cdaf4dda74
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 441a79d517c1b75dc301becbb4d8f93b2b5b50fa
+PODFILE CHECKSUM: c97e99fd8cd66d9347915c1b634ff942d0e04ab3
 
 COCOAPODS: 1.11.3

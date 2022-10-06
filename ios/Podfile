@@ -8,7 +8,7 @@ production = ENV["PRODUCTION"] == "1"
 
 target 'inai_react_native_sample_integration' do
   config = use_native_modules!
-  pod 'inai-pod', '0.1.17'
+  # pod 'inai-pod', '0.1.17'
   
   # Flags change depending on the env values.
   flags = get_default_flags()

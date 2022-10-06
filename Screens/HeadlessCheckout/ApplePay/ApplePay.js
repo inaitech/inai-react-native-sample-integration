@@ -12,6 +12,7 @@
  import Constants from "../../../Constants";
  import Base64 from "./Base64";
  import AsyncStorage from '@react-native-async-storage/async-storage';
+ import  InaiCheckout  from  "ay-inai-react-native-sdk";
 
  import {
    SafeAreaView, NativeModules, View, ActivityIndicator, Alert, Button, SliderBase
@@ -112,7 +113,7 @@
   const [applePayRequestData, setApplePayRequestData] = useState(null);
   const [buttonTitle, setButtonTitle] = useState("Loading..");
   
-  const { InaiCheckoutModule } = NativeModules;
+
 
   useEffect(() => {
       async function initData() {
@@ -158,7 +159,7 @@
 
   
   const setupApplePayUI = (paymentMethods) => {
-    InaiCheckoutModule.getApplePayRequestData({"payment_method_options": paymentMethods}).then((requestData) => {
+    InaiCheckout.getApplePayRequestData({"payment_method_options": paymentMethods}).then((requestData) => {
       setApplePayRequestData(requestData);
     });
   }
@@ -170,7 +171,7 @@
       countryCode: Constants.country
     };
 
-    InaiCheckoutModule.payWithApplePay(inaiConfig, applePayRequestData).then((response) => {
+    InaiCheckout.payWithApplePay(inaiConfig, applePayRequestData).then((response) => {
       Alert.alert(
         "Result",
         JSON.stringify(response),
@@ -198,7 +199,7 @@
   };
 
   const setupApplePay = () => {
-    InaiCheckoutModule.setupApplePay();
+    InaiCheckout.setupApplePay();
   };
 
   const sanitizeRailCode =(railCode) => {

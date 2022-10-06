@@ -8,8 +8,8 @@ import Constants from "../../Constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Base64 from "./Base64";
 import { SafeAreaView } from "react-native-safe-area-context";
+import  InaiCheckout  from  "ay-inai-react-native-sdk";
 
-const { InaiCheckoutModule } = NativeModules;
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
     if (customerId) {
@@ -33,7 +33,7 @@ const getStoredCustomerId = async () => {
 }
 
 const preapreOrder =
-    async () => {        
+    async () => {
      let postData = {
          "amount": Constants.amount,
          "currency": Constants.currency,
@@ -57,7 +57,7 @@ const preapreOrder =
      const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
      const requestOptions = {
          method: "POST",
-         headers: { 
+         headers: {
                      "Content-Type": "application/json",
                      "Authorization": authStr
                  },
@@ -67,7 +67,7 @@ const preapreOrder =
      const ordersUrl = `${Constants.base_url}/orders`;
      const response = await fetch(ordersUrl, requestOptions);
      const jsonData = await response.json();
-     
+
      let id = jsonData.id || null;
      if(id != null) {
       //  Store the customer id
@@ -85,13 +85,13 @@ const preapreOrder =
   };
 
   let inaiConfig = {
-    token: Constants.token, 
-    orderId: orderId, 
+    token: Constants.token,
+    orderId: orderId,
     countryCode: Constants.country,
     styles: styles
   };
 
-    InaiCheckoutModule.presentCheckout(inaiConfig).then((response) => {
+    InaiCheckout.presentCheckout(inaiConfig).then((response) => {
         Alert.alert(
             "Result",
             JSON.stringify(response),
@@ -126,15 +126,15 @@ const DropInCheckout = ({navigation}) => {
           //  Load order id
           let generatedOrderId = await preapreOrder();
           if (generatedOrderId!= null) {
-                setShowActivityIndicator(false); 
+                setShowActivityIndicator(false);
                 presentCheckout(generatedOrderId, navigation);
           } else {
-            setShowActivityIndicator(false); 
+            setShowActivityIndicator(false);
             Alert.alert(
               "Error",
               "Error while creating order",
               [
-                {text: 'OK', onPress: () => { 
+                {text: 'OK', onPress: () => {
                   navigation.navigate("Home");
                 }},
               ]
@@ -147,10 +147,10 @@ const DropInCheckout = ({navigation}) => {
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
             {showActivityIndicator &&
-            <View style={{  
-                        position: "absolute", 
+            <View style={{
+                        position: "absolute",
                         backgroundColor: "#F5FCFF88",
-                        top: 0, right: 0, bottom: 0, left: 0, 
+                        top: 0, right: 0, bottom: 0, left: 0,
                         alignItems: 'center',
                         justifyContent: 'center'}}>
             <ActivityIndicator size='large' />
