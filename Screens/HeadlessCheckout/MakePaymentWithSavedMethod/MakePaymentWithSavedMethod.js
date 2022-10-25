@@ -65,7 +65,7 @@
      const ordersUrl = `${Constants.base_url}/orders`;
      const response = await fetch(ordersUrl, requestOptions);
      const jsonData = await response.json();
-     console.log("jsonData: " + JSON.stringify(jsonData));
+     
      
      let id = jsonData.id || null;
      if(id != null) {
@@ -125,6 +125,7 @@
             setPaymentOptions(payment_method_options);
           }
         } else {
+          
           Alert.alert(
             "Error",
             "Error while creating order",

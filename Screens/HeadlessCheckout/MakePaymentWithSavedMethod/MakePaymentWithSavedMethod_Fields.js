@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import CheckBox from "@react-native-community/checkbox";
 import Constants from "./../../../Constants";
 import ExpiryDate from "./ExpiryDate";
-import  InaiCheckout  from  "ay-inai-react-native-sdk";
+import  InaiCheckout  from  'inai-react-native-sdk';
 import {
   SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
 } from 'react-native';
@@ -88,6 +88,7 @@ const MakePaymentWithSavedMethod_Fields = ({ navigation, route }) => {
       inaiConfig,
       paymentOption.rail_code, 
       paymentDetailsFields).then((response) => {
+        console.log(`makepayment saved data ${JSON.stringify(response)}`);
         Alert.alert(
           "Result",
           JSON.stringify(response),
@@ -100,6 +101,8 @@ const MakePaymentWithSavedMethod_Fields = ({ navigation, route }) => {
           ]
         );
       }).catch((err) => {
+        console.log(" `makePayment saved  Error ");
+        console.log(`makePayment saved Error ${err}`);
         Alert.alert(
           "Result",
           JSON.stringify(err),

@@ -8,7 +8,7 @@ import Constants from "../../Constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Base64 from "./Base64";
 import { SafeAreaView } from "react-native-safe-area-context";
-import  InaiCheckout  from  "ay-inai-react-native-sdk";
+import  InaiCheckout  from  'inai-react-native-sdk';
 
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
@@ -42,6 +42,8 @@ const preapreOrder =
          "customer" : {}
      };
 
+      
+
      let storedCustomerId = await getStoredCustomerId();
      if (storedCustomerId) {
       postData.customer.id = storedCustomerId;
@@ -53,6 +55,7 @@ const preapreOrder =
              "contact_number": "01010101010"
             };
      }
+
 
      const authStr = `Basic ${Base64.btoa(Constants.token + ":" + Constants.password, "base64")}`;
      const requestOptions = {
@@ -91,7 +94,10 @@ const preapreOrder =
     styles: styles
   };
 
+  
     InaiCheckout.presentCheckout(inaiConfig).then((response) => {
+      
+      console.log(`DropInCheckout data ${JSON.stringify(response)}`);
         Alert.alert(
             "Result",
             JSON.stringify(response),
@@ -104,6 +110,8 @@ const preapreOrder =
             ]
           );
     }).catch((err) => {
+      console.log(" DropInCheckout Error ");
+      console.log(`DropInCheckout Error ${err}`);
         Alert.alert(
             "Result",
             JSON.stringify(err),
@@ -130,6 +138,7 @@ const DropInCheckout = ({navigation}) => {
                 presentCheckout(generatedOrderId, navigation);
           } else {
             setShowActivityIndicator(false);
+            
             Alert.alert(
               "Error",
               "Error while creating order",

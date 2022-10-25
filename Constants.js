@@ -1,6 +1,6 @@
 const Constants = { 
-        token : "sbx_ci_4SqUjM1ArHfP9GS8FJVMHoyKUCVtkU3FJhd9rTmFRJHJ",
-        password: "sbx_cs_wib45REzHpm9RikS2ZyJAYxNpbiAbTTvRMNpJvWUk2Z",
+        token : "sbx_ci_7kCbmGnJBYmC4TwUz1FA3FsWPnRKQG3gzCX4R87VDTsS",
+        password: "sbx_cs_HGGbrw5QTX9Y4EaqCk8ssa3CoUk5cumU2w1omXHfBqmk",
         base_url: "https://api.inai.io/v1",
         amount: "100",
         country: "USA",

@@ -11,9 +11,9 @@
  import Constants from "../../../Constants";
  import AsyncStorage from '@react-native-async-storage/async-storage';
  import Base64 from "./Base64";
- import  InaiCheckout  from  "ay-inai-react-native-sdk";
+ import  InaiCheckout  from  'inai-react-native-sdk';
 
- import {
+  import {
    SafeAreaView, Alert, Button, View, Text, Image, TextInput, ActivityIndicator, NativeModules
  } from 'react-native';
  
@@ -118,6 +118,7 @@ const preapreOrder =
                 setOrderId(generatedOrderId);
                 setShowActivityIndicator(false); 
           } else {
+            
             Alert.alert(
               "Error",
               "Error while creating order",
@@ -185,6 +186,8 @@ const preapreOrder =
         InaiCheckout.getCardInfo(
             inaiConfig, currentCardNumber).then((response) => {
                 setShowActivityIndicator(false);
+                console.log(`getCardInfo data ${JSON.stringify(response)}`);
+                
                 if (showResultAlert){
                     Alert.alert(
                         "Result",
@@ -197,7 +200,9 @@ const preapreOrder =
                 }
             }).catch((err) => {
             setShowActivityIndicator(false);
-            Alert.alert(
+            console.log(" getCardInfo Error ");
+            console.log(`getCardInfo Error ${err}`);
+                  Alert.alert(
                 "Error",
                 JSON.stringify(err),
                 [{text: 'OK'}]

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { SafeAreaView, NativeModules, Alert, Button, View } from "react-native";
 import Constants from "./../../../Constants";
-import  InaiCheckout  from  "ay-inai-react-native-sdk";
+import  InaiCheckout  from  'inai-react-native-sdk';
 const Colors = {
     "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
     "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"

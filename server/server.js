@@ -24,7 +24,7 @@ app.use(express.json());
 
 // create an order
 app.post('/v1/orders', async (req, res) => {
-  console.log("Preparing Order");
+  
     try{
         const token = Buffer.from(`${process.env.client_username}:${process.env.client_password}`).toString('base64');
         const options = {
@@ -69,7 +69,7 @@ app.get('/v1/payment-method-options', async (req, res) => {
         const response = await fetch(payment_method_options_url, options);
         const response_data = await response.json();
         if (response_data.message || response.status !== 200) {
-          console.log(response_data);
+          
           return res.status(400).json(response_data);
         }
         res.status(response.status).json(response_data);
@@ -82,10 +82,10 @@ app.get('/v1/payment-method-options', async (req, res) => {
 // get Customer Payment methods
 app.get('/v1/customers/:customerId/payment-methods', async (req, res) => {
   try{
-      console.log("Get Customer payment-methods");
+      
       const customerId =  req.params.customerId;
       const customerUrl = `${baseUrl}/customers/${customerId}/payment-methods`;
-      console.log(customerUrl);
+      
 
       const token = Buffer.from(`${process.env.client_username}:${process.env.client_password}`).toString('base64');
       const options = {
@@ -99,7 +99,7 @@ app.get('/v1/customers/:customerId/payment-methods', async (req, res) => {
       const response = await fetch(customerUrl, options);
       const response_data = await response.json();
 
-      console.log(response_data);
+      
 
       if (response_data.message || response.status !== 200) {
         return res.status(400).json(response_data);

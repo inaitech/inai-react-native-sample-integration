@@ -22,6 +22,7 @@ const Colors = {
   const {mode} = route.params;
 
   const showPaymentOptions = () => {
+    
     if (mode == "payWithSavedMethod") {
       navigation.navigate("MakePaymentWithSavedMethod");
     } else if(mode == "dropInCheckout"){
@@ -62,6 +63,7 @@ A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
            >
              <Button
                onPress= { () => {
+                    
                     showPaymentOptions();
                  }
                }

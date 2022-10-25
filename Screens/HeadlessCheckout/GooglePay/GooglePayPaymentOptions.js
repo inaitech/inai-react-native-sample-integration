@@ -128,7 +128,7 @@ const GooglePayPaymentOptions = ({navigation}) => {
     }, [])
   
     const paymentOptionSelected = (paymentOption) => {
-        console.log(paymentOption)
+        
       navigation.navigate("GooglePayFields", {paymentOption, orderId});
     }
   

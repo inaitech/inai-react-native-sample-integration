@@ -12,7 +12,7 @@
 
  import CheckBox from  "@react-native-community/checkbox";
  import Constants from "./../../../Constants";
- import InaiCheckout  from  "ay-inai-react-native-sdk";
+ import  InaiCheckout  from  'inai-react-native-sdk';
  import {
    SafeAreaView, FlatList, TextInput, NativeModules,ActivityIndicator, Text, View, Alert, Button
  } from 'react-native';
@@ -54,6 +54,8 @@
       inaiConfig,
       paymentOption.rail_code, 
       paymentDetailsFields).then((response) => {
+        console.log(`validatefields data ${JSON.stringify(response)}`);
+        
         setIsLoading(false);
             Alert.alert(
               "Result",
@@ -64,6 +66,8 @@
             );
       }).catch((err) => {
         setIsLoading(false);
+        console.log(" validateFields Error ");
+        console.log(`validateFields Error ${err}`);
         Alert.alert(
           "Result",
           JSON.stringify(err),

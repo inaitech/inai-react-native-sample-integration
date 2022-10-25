@@ -12,7 +12,7 @@
  import Constants from "../../../Constants";
  import Base64 from "./Base64";
  import AsyncStorage from '@react-native-async-storage/async-storage';
- import  InaiCheckout  from  "ay-inai-react-native-sdk";
+ import  InaiCheckout  from  'inai-react-native-sdk';
 
  import {
    SafeAreaView, NativeModules, View, ActivityIndicator, Alert, Button, SliderBase
