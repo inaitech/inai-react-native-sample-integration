@@ -17,6 +17,7 @@ import {
   SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
 } from 'react-native';
 import ExpiryDate from "./ExpiryDate";
+import InaiCheckout from "react-native-inai-sdk";
 
 const Colors = {
   "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
@@ -24,7 +25,6 @@ const Colors = {
 };
 
 const MakePayment_Fields = ({ navigation, route }) => {
-  const { InaiCheckoutModule } = NativeModules;
   const { paymentOption, orderId } = route.params;
   const paymentFields = paymentOption.form_fields;
 
@@ -82,7 +82,7 @@ const MakePayment_Fields = ({ navigation, route }) => {
       styles: styles
     };
 
-    InaiCheckoutModule.makePayment(
+    InaiCheckout.makePayment(
       inaiConfig,
       paymentOption.rail_code,
       paymentDetailsFields).then((response) => {

@@ -12,6 +12,7 @@
 
  import CheckBox from  "@react-native-community/checkbox";
  import Constants from "./../../../Constants";
+ import InaiCheckout from "react-native-inai-sdk";
 
  import {
    SafeAreaView, FlatList, TextInput, NativeModules,ActivityIndicator, Text, View, Alert, Button
@@ -23,7 +24,6 @@
  };
  
  const ValidateFields_Fields = ({navigation, route}) => {
-  const { InaiCheckoutModule } = NativeModules;
   let {paymentOption, orderId} = route.params;
   let [isLoading, setIsLoading] = useState(false);
 
@@ -50,7 +50,7 @@
       orderId: orderId,
       countryCode: Constants.country,
     };
-    InaiCheckoutModule.validateFields(
+    InaiCheckout.validateFields(
       inaiConfig,
       paymentOption.rail_code, 
       paymentDetailsFields).then((response) => {
