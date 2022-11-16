@@ -14,7 +14,7 @@ import CheckBox from "@react-native-community/checkbox";
 import Constants from "./../../../Constants";
 
 import {
-  SafeAreaView, FlatList, TextInput, NativeModules, Text, View, Alert, Button
+  SafeAreaView, FlatList, TextInput, Text, View, Alert, Button
 } from 'react-native';
 import ExpiryDate from "./ExpiryDate";
 import InaiCheckout from "react-native-inai-sdk";

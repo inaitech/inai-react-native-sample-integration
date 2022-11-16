@@ -1,14 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
-   View, Alert, ActivityIndicator, NativeModules
+   View, Alert, ActivityIndicator, Button, Image, Text,
 } from 'react-native';
 
-import Constants from "../../Constants";
+import Constants from "../../../Constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Base64 from "./Base64";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InaiCheckout from "react-native-inai-sdk";
+
+const Colors = {
+    "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
+    "button_container_bg" : Platform.OS === 'ios' ? "#7673dd": "white"
+  };
 
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
@@ -30,6 +35,17 @@ const getStoredCustomerId = async () => {
     }
 
     return storedCustomerId;
+}
+
+const paymentMethodIdStoreKey = `paymentMethodId-${Constants.token}`
+const storePaymentMethodId = async (paymentMethodId) => {
+    if (paymentMethodId) {
+        try {
+            await AsyncStorage.setItem(paymentMethodIdStoreKey, paymentMethodId);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 const preapreOrder =
@@ -76,7 +92,7 @@ const preapreOrder =
      return id;
  }
 
- const presentCheckout = (orderId, navigation) => {
+ const addPaymentMethod = (orderId, navigation) => {
 
   let styles = {
     container: {backgroundColor: "#fff"},
@@ -91,7 +107,9 @@ const preapreOrder =
     styles: styles
   };
 
-    InaiCheckout.presentCheckout(inaiConfig).then((response) => {
+    InaiCheckout.addPaymentMethod(inaiConfig, "card").then((response) => {
+        storePaymentMethodId(response["payment_method_id"]);
+        
         Alert.alert(
             "Result",
             JSON.stringify(response),
@@ -118,31 +136,28 @@ const preapreOrder =
     });
  }
 
-const DropInCheckout = ({navigation}) => {
-    let [showActivityIndicator, setShowActivityIndicator] = useState(true);
-
-    useEffect(() => {
-        async function initData() {
-          //  Load order id
-          let generatedOrderId = await preapreOrder();
-          if (generatedOrderId!= null) {
-                setShowActivityIndicator(false); 
-                presentCheckout(generatedOrderId, navigation);
-          } else {
-            setShowActivityIndicator(false); 
-            Alert.alert(
-              "Error",
-              "Error while creating order",
-              [
-                {text: 'OK', onPress: () => { 
-                  navigation.navigate("Home");
-                }},
-              ]
-            );
-          }
+const AddPaymentMethod = ({navigation}) => {
+    let [showActivityIndicator, setShowActivityIndicator] = useState(false);
+    const initData = async () => {
+        setShowActivityIndicator(true); 
+        //  Load order id
+        let generatedOrderId = await preapreOrder();
+        if (generatedOrderId!= null) {
+              setShowActivityIndicator(false); 
+              addPaymentMethod(generatedOrderId, navigation);
+        } else {
+          setShowActivityIndicator(false); 
+          Alert.alert(
+            "Error",
+            "Error while creating order",
+            [
+              {text: 'OK', onPress: () => { 
+                navigation.navigate("Home");
+              }},
+            ]
+          );
         }
-        initData();
-    }, []);
+      }
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
@@ -156,8 +171,40 @@ const DropInCheckout = ({navigation}) => {
             <ActivityIndicator size='large' />
             </View>
             }
+            <Text style={{marginTop: 20, marginBottom: 20, fontSize: 20, fontWeight: "700", textAlign: "center"}}>Acme Shirt</Text>
+         
+         <View style={{justifyContent: 'center', alignItems: 'center',}}>
+            <Image source={require("../../../Assets/inai-white.png")} 
+                style={{ width: 80, height: 80, resizeMode: 'contain' }} />
+
+            <Image source={require("../../../Assets/tshirt.jpeg")} 
+                style={{ width: 200, height: 220, resizeMode: 'contain' }} />
+         </View>
+         <Text style={{textAlign: 'center', width: "100%", fontSize: 16, fontWeight:"500"}}>MANCHESTER UNITED 21/22 HOME JERSEY</Text>
+         <Text style={{textAlign: 'center'}}>{`
+A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
+
+`}</Text>
+         <View
+             style={{
+               backgroundColor: Colors.button_container_bg, 
+               marginLeft: 15, 
+               borderRadius: 5,
+               marginRight: 15, 
+               marginTop: 10, 
+               padding: 5}}
+           >
+             <Button
+               onPress= { () => {
+                    initData();
+                 }
+               }
+               color={Colors.button_bg}
+               title= "Buy Now"
+             />
+           </View>
         </SafeAreaView>
     );
 };
 
-export default DropInCheckout;
+export default AddPaymentMethod;

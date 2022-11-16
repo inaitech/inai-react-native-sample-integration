@@ -35,8 +35,17 @@
  // Get Card Info
  import GetCardInfo from "./Screens/HeadlessCheckout/GetCardInfo/GetCardInfo";
 
- //Drop In Checkput
- import DropInCheckout from "./Screens/DropIn/DropInCheckout";
+ // Drop In Flows
+ import DropInFlows from "./Screens/DropIn/DropInFlows";
+
+ // Drop In Checkput
+ import DropInCheckout from "./Screens/DropIn/DropInCheckout/DropInCheckout";
+
+ // Add Payment Method
+ import AddPaymentMethod from "./Screens/DropIn/AddPaymentMethod/AddPaymentMethod";
+
+ // Pay With Payment Method
+ import PayWithPaymentMethod from "./Screens/DropIn/PayWithPaymentMethod/PayWithPaymentMethod";
 
  // Google Pay
  import GooglePayPaymentOptions from "./Screens/HeadlessCheckout/GooglePay/GooglePayPaymentOptions";
@@ -69,7 +78,13 @@
 
             <Stack.Screen name="GetCardInfo" component={GetCardInfo} options={{ title: "Get Card Info" }} />
 
-            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Drop In Checkout" }} />
+            <Stack.Screen name="DropInFlows" component={DropInFlows} options={{ title: "Drop In Checkout"}} />
+
+            <Stack.Screen name="DropInCheckout" component={DropInCheckout} options={{ title: "Checkout" }} />
+
+            <Stack.Screen name="AddPaymentMethod" component={AddPaymentMethod} options={{ title: "Add Payment Method" }} />
+
+            <Stack.Screen name="PayWithPaymentMethod" component={PayWithPaymentMethod} options = {{ title: "Pay With Payment method"}}/>
 
             <Stack.Screen name="GooglePay" component={GooglePayPaymentOptions} options = {{title : "Payment Methods"}} />
             <Stack.Screen name="GooglePayFields" component={GooglePayFields} options = {{title : "Google Pay"}} />

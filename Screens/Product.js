@@ -24,8 +24,6 @@ const Colors = {
   const showPaymentOptions = () => {
     if (mode == "payWithSavedMethod") {
       navigation.navigate("MakePaymentWithSavedMethod");
-    } else if(mode == "dropInCheckout"){
-      navigation.navigate("DropInCheckout");
     } else if(mode == "applePay"){
       navigation.navigate("ApplePay");
     } else{
