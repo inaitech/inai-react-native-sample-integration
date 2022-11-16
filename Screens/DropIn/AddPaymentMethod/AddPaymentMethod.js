@@ -37,6 +37,17 @@ const getStoredCustomerId = async () => {
     return storedCustomerId;
 }
 
+const paymentMethodIdStoreKey = `paymentMethodId-${Constants.token}`
+const storePaymentMethodId = async (paymentMethodId) => {
+    if (paymentMethodId) {
+        try {
+            await AsyncStorage.setItem(paymentMethodIdStoreKey, paymentMethodId);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
 const preapreOrder =
     async () => {        
      let postData = {
@@ -97,6 +108,8 @@ const preapreOrder =
   };
 
     InaiCheckout.addPaymentMethod(inaiConfig, "card").then((response) => {
+        storePaymentMethodId(response["payment_method_id"]);
+        
         Alert.alert(
             "Result",
             JSON.stringify(response),
@@ -125,12 +138,10 @@ const preapreOrder =
 
 const AddPaymentMethod = ({navigation}) => {
     let [showActivityIndicator, setShowActivityIndicator] = useState(false);
-
     const initData = async () => {
         setShowActivityIndicator(true); 
         //  Load order id
         let generatedOrderId = await preapreOrder();
-        console.log("GeneratedOrderId: " + generatedOrderId) 
         if (generatedOrderId!= null) {
               setShowActivityIndicator(false); 
               addPaymentMethod(generatedOrderId, navigation);
