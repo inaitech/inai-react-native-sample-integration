@@ -14,7 +14,7 @@
  import InaiCheckout from "react-native-inai-sdk";
 
  import {
-   SafeAreaView, Alert, Button, View, Text, Image, TextInput, ActivityIndicator, NativeModules
+   SafeAreaView, Alert, Button, View, Image, TextInput, ActivityIndicator
  } from 'react-native';
  
 const Colors = {
