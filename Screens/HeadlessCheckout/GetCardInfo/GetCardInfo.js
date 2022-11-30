@@ -11,6 +11,7 @@
  import Constants from "../../../Constants";
  import AsyncStorage from '@react-native-async-storage/async-storage';
  import Base64 from "./Base64";
+ import InaiCheckout from "react-native-inai-sdk";
 
  import {
    SafeAreaView, Alert, Button, View, Text, Image, TextInput, ActivityIndicator, NativeModules
@@ -88,8 +89,6 @@ const preapreOrder =
  }
 
  const GetCardInfo = () => {
-
-    const { InaiCheckoutModule } = NativeModules;
 
     let [cardNumber, setCardNumber] = useState("");
     let [showActivityIndicator, setShowActivityIndicator] = useState(true);
@@ -181,7 +180,7 @@ const preapreOrder =
             countryCode: Constants.country,
         };
         
-        InaiCheckoutModule.getCardInfo(
+        InaiCheckout.getCardInfo(
             inaiConfig, currentCardNumber).then((response) => {
                 setShowActivityIndicator(false);
                 if (showResultAlert){

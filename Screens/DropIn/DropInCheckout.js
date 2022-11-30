@@ -8,8 +8,8 @@ import Constants from "../../Constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Base64 from "./Base64";
 import { SafeAreaView } from "react-native-safe-area-context";
+import InaiCheckout from "react-native-inai-sdk";
 
-const { InaiCheckoutModule } = NativeModules;
 const customerIdStoreKey = `customerId-${Constants.token}`;
 const storeCustomerId = async (customerId) => {
     if (customerId) {
@@ -91,7 +91,7 @@ const preapreOrder =
     styles: styles
   };
 
-    InaiCheckoutModule.presentCheckout(inaiConfig).then((response) => {
+    InaiCheckout.presentCheckout(inaiConfig).then((response) => {
         Alert.alert(
             "Result",
             JSON.stringify(response),
