@@ -32,8 +32,7 @@ const openFlow = (flowKey, navigation) => {
     navigation.navigate(flowKey);
   } else if (flowKey == "DropInCheckout") {
     //  Load product view with pay with saved method mode
-    navKey = "Product";
-    options = {mode: "dropInCheckout"};
+    navKey = "DropInFlows";
   } 
   navigation.navigate(navKey, options); 
 };

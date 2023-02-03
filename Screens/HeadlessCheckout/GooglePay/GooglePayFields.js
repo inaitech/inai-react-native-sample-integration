@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { SafeAreaView, NativeModules, Alert, Button, View } from "react-native";
 import Constants from "./../../../Constants";
+import InaiCheckout from "react-native-inai-sdk";
 
 const Colors = {
     "button_bg" : Platform.OS === 'ios' ? "white" : "#7673dd",
@@ -11,9 +12,7 @@ const Colors = {
 
 const GooglePayFields = ({ navigation, route }) => {
 
-    const { InaiCheckoutModule } = NativeModules;
     const { paymentOption, orderId } = route.params;
-    
     const [shouldShowGpayButton, setShouldShowGpayButton] = useState(false);
 
     const initGooglePay = () => {
@@ -22,7 +21,7 @@ const GooglePayFields = ({ navigation, route }) => {
         paymentMethodsArray.push(paymentOption)
         let paymentDetailsFields = { "payment_method_options": paymentMethodsArray }
         //  Fire off google pay checks here..
-        InaiCheckoutModule.initGooglePay(
+        InaiCheckout.initGooglePay(
             paymentDetailsFields
         ).then((response) => {
             //  Show Gpay button only if the user is allowed to use google pay.
@@ -49,7 +48,7 @@ const GooglePayFields = ({ navigation, route }) => {
             orderId: orderId,
             countryCode: Constants.country
         };
-        InaiCheckoutModule.launchGooglePay(inaiConfig).then(
+        InaiCheckout.launchGooglePay(inaiConfig).then(
             (response) => {
                 //   If google pay is success then handle success.
                 Alert.alert(
